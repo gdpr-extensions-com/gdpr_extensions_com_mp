@@ -2,7 +2,7 @@
   "name": "gdpr-extensions-com/gdpr-extensions-com-mp",
   "type": "typo3-cms-extension",
   "description": "Track your website viewers behavior and get your user analytics but only if they consent to! Stay GDPR compliant when your website is scanned by any Cookie or GDPR Scanner, when using Meta Pixel Analytics.",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "authors": [],
   "license": "GPL-2.0-or-later",
   "require": {

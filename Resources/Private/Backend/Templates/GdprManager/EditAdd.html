@@ -1,0 +1,1076 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+This template displays a EDIT form for the current domain object.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+Resources:
+Private:
+Backend:
+Templates:
+GdprManager:
+editAdd.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+
+
+<f:section name="Content">
+<style>
+    @font-face {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Poppins Regular'), local('Poppins-Regular'),
+            url('../Resources/Public/Fonts/Poppins-Regular.otf') format('opentype');
+    }
+
+    @font-face {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 500;
+        src: local('Poppins Medium'), local('Poppins-Medium'),
+            url('../Resources/Public/Fonts/Poppins-Medium.otf') format('opentype');
+    }
+
+    @font-face {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 700;
+        src: local('Poppins Bold'), local('Poppins-Bold'),
+            url('../Resources/Public/Fonts/Poppins-Bold.otf') format('opentype');
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .tab {
+        cursor: pointer;
+        padding: 10px 20px;
+        margin: 0;
+        background: #EE7202;
+        display: inline-block;
+        color: #fff;
+        border-radius: 3px 3px 0px 0px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+
+    .panels {
+        background: #fff;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 4px;
+        min-height: 200px;
+        width: calc(100% - 45px);
+        margin-right: 5px;
+        overflow: hidden;
+        padding: 20px;
+        overflow: auto;
+        height: 50vh;
+        max-height: 400px;
+    }
+
+    .panel {
+        display: none;
+        animation: fadein 0.8s;
+    }
+
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .panel-title {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .radio {
+        display: none;
+    }
+
+    #one:checked~.panels #one-panel,
+    #two:checked~.panels #two-panel,
+    #three:checked~.panels #three-panel {
+        display: block;
+    }
+
+    #one:checked~.tabs #one-tab,
+    #two:checked~.tabs #two-tab,
+    #three:checked~.tabs #three-tab {
+        background: #fff;
+        color: #000;
+        border-top: 3px solid #EE7202;
+    }
+
+    .d-flex {
+        display: flex;
+        margin: 10px 0;
+    }
+
+    .file-upload-wrapper {
+        position: relative;
+    }
+
+    .my-4-9 {
+        margin: 4px 0px 9px 0;
+    }
+
+    .d-none {
+        display: none;
+    }
+
+    .file-upload-wrapper {
+        margin-top: -12px;
+    }
+
+    /* toggle btn */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 47px;
+        height: 20px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 15px;
+        width: 15px;
+        left: 3px;
+        bottom: 2.5px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked + .slider {
+        background-color: #EE7202;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #EE7202;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+    .uplodedImageTitle {
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    .pad-3-4 {
+        padding: 3px 4px;
+        outline: none;
+    }
+
+    .color-field {
+        margin-top: 3px;
+        padding: 0;
+        margin-left: 20px;
+    }
+
+    .uploadImage {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .uploadImage-cookie {
+        flex-direction: column;
+    }
+
+    .uploadImage-cookie img {
+        width: 200px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .uploadImage img {
+        width: 200px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .field-style {
+        border-color: #D1D1D1;
+        border: 1px solid #D1D1D1;
+        border-radius: 6px;
+        padding: 6px 9px;
+        width: 340px;
+        outline: none;
+    }
+
+    .mt-5px {
+        margin-top: 5px;
+    }
+
+    input[type="color"].color-field {
+        cursor: pointer;
+        position: relative;
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        padding: 0;
+        border: 1px solid #2172B1;
+        overflow: hidden;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    input[type="color"].color-field::-webkit-color-swatch {
+       border: none;
+    }
+    input[type="color"].color-field::-webkit-color-swatch-wrapper {
+        padding: 0px;
+    }
+
+    .uploaded-image {
+        width: 350px;
+        height: 250px;
+        background-color: white;
+        box-shadow: 0px 0px 6px 0px #00000026;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cookie-icon {
+        width: 150px;
+        height: 100px;
+        background-color: white;
+        box-shadow: 0px 0px 6px 0px #00000026;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px;
+    }
+
+    .cookie-icon img {
+        width: 70px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .btn-bg-transparent {
+        background: transparent;
+        border-radius: 6px;
+        border: 1px solid #EE7202;
+        color: #EE7202;
+        padding: 8px 17px;
+        margin-top: 12px;
+        width: 108px;
+    }
+
+    .w-185px {
+        width: 185px;
+    }
+
+    /* new styling */
+    .matomo2Click {
+        font-family: 'Poppins' !important;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        max-height: 80vh;
+        overflow: auto;
+    }
+
+    p {
+        color: #626262;
+        font-size: 16px;
+        margin: 8px 0;
+    }
+
+    h2 {
+        margin: 10px 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: #487DD6;
+        padding: 4px 0;
+    }
+
+    .gap {
+        gap: 10px;
+    }
+
+    .btn {
+        border: 0;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 23px;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    .btn-outline {
+        border: 1px solid #ee7202;
+        color: #ee7202 !important;
+    }
+
+    .btn-primary {
+        border: 1px solid #ee7202;
+        background-color: #ee7202;
+        color: #fff !important;
+    }
+
+    .btn-default {
+        margin: 20px;
+    }
+
+    .extensionPromotions {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #E7E6E6;
+    }
+
+    .extensionPromotions p {
+        font-size: 16px;
+        line-height: 8px;
+    }
+
+    .bold {
+        font-weight: 600;
+        color: #000;
+    }
+
+    .light {
+        font-size: 10px !important;
+        font-weight: 400px;
+        color: #626262;
+    }
+
+    .pair-center {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .pair-end {
+        display: flex;
+        align-items: end;
+        gap: 15px;
+    }
+
+    .center {
+        align-items: center;
+    }
+
+    .mt-2 {
+        margin-top: 20px;
+    }
+
+    .mb-2 {
+        margin-bottom: 20px;
+    }
+
+    .mb-3 {
+        margin-bottom: 30px;
+    }
+
+    .main-headline {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .custom-accordion {
+        margin-top: 20px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #E7E6E6;
+    }
+
+    .custom-accordion .accordion-toggle {
+        background-color: #F3F2F2;
+        color: black;
+        cursor: pointer;
+        padding: 10px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: background-color 0.3s ease;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 6px;
+    }
+
+    .accordion-toggle.rotate-image img {
+        transform: rotate(90deg);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .custom-accordion .accordion-toggle:not(:last-child) {
+        border-bottom: 1px solid #e7e7e7;
+    }
+
+    .custom-accordion .accordion-toggle:hover,
+    .custom-accordion .accordion-toggle.active {
+        background-color: #F3F2F2;
+    }
+
+    .custom-accordion .accordion-content {
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        max-height: 0;
+        padding-left: 15px;
+        background-color: #fff;
+    }
+
+    .custom-accordion .accordion-content p {
+        margin: 8px 0;
+    }
+
+    .rec-size {
+        margin-top: 8px !important;
+        margin-bottom: 12px !important;
+        font-size: 10px;
+    }
+
+    .popUpoverlay {
+        backdrop-filter: blur(3px);
+        background: rgba(52, 52, 52, .8);
+        left: 0;
+        min-height: 100%;
+        position: fixed;
+        top: 0;
+        transition: all .3s ease-out;
+        width: 100%;
+        z-index: 11;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+   .popUp {
+        background-color: #fff;
+        max-width: 900px;
+        display: flex;
+        align-items: center;
+        border-radius: 5px;
+    }
+
+   .popUp--content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 0px 20px;
+        width: 550px;
+        height: 400px;
+        text-align: left;
+    }
+    .popUp--content h1{
+        margin: 0;
+    }
+    .scroll {
+        background-color: #FFECDB;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+
+    .upload-btn {
+        color: #ee7202;
+        background: transparent;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        border: 1px solid #ee7202;
+        display: flex;
+        align-items: center;
+        max-width: 50px;
+        height: 40px;
+        height: 37px;
+        margin-top: 3px;
+    }
+
+    .upload-btn img {
+        margin-left: 5px;
+        width: 24px;
+        height: 24px !important;
+    }
+
+    .upload-icon {
+        width: 100%;
+    }
+
+    .uploadImage img {
+        width: unset;
+        height: auto;
+        object-fit: contain;
+    }
+
+    img.cancel {
+        position: relative;
+        width: 12px;
+        height: 12px;
+        right: 12px;
+        bottom: 3px;
+    }
+
+    button.choose_file {
+        border: 1px solid #ee7202;
+        color: #ee7202;
+        background: transparent;
+        border-radius: 6px;
+        width: 130px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        position: relative;
+        margin-top: 15px;
+    }
+
+    .file-upload-wrapper .file-upload-input {
+        position: absolute;
+        left: 0;
+        opacity: 0;
+        z-index: 1;
+        cursor: pointer;
+        width: 130px;
+        bottom: -2px;
+    }
+    .btn-bg {
+        color: #fff;
+        background: #ee7202;
+        border-radius: 6px;
+        padding: 7px 14px;
+        border: none;
+        cursor: pointer;
+    }
+    .btn-bg:disabled{
+        opacity:0.5;
+    }
+    hr{
+        border-top-width: 0;
+        width: 100%;
+    }
+    .accept-all {
+        width: 100%;
+        text-align: center;
+    }
+</style>
+    <f:form action="save" object="{gdprManager}" name="gdprManager">
+
+        <div class="d-none">
+            <span id="uploadImageUrl">{uploadImageUrl}</span>
+        </div>
+
+        <div class="matomo2Click">
+            <div class="mainLogo">
+                <picture>
+                    <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/gdprextension.com.svg" id=""
+                        alt="gdprextension.com.svg" class="" />
+                </picture>
+            </div>
+            <div class="extensionPromotions">
+                <div class="col-7">
+                    <div class="content">
+                        <p class="bold">Explore More of our Solutions</p>
+                        <p class="light">2-Click Solutions Available Now to Check Out</p>
+                        <div class="pair-end mt-2">
+                            <span>
+                                <a href="https://www.gdpr-extensions.com/gdpr-solutions" target="_blank" class="btn btn-outline">Explore</a>
+                            </span>
+                            <span>
+                                <picture>
+                                    <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/arrow.svg" id=""
+                                        alt="arrow.svg" class="" />
+                                </picture>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <picture>
+                        <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/logosgroup.svg" id=""
+                            alt="logosgroup.svg" class="" />
+                    </picture>
+                </div>
+            </div>
+            <div class="extensionBriefing">
+                <div class="main-headline">
+                    <h2>Meta Pixel 2-Click Solution</h2>
+                    <picture>
+                        <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/smyoutube.svg" id=""
+                            alt="smyoutube.svg" class="" />
+                    </picture>
+                </div>
+                <div class="content">
+                    <p>Welcome to the your Meta Pixel 2-Click Solution Customization page.</p>
+                    <p>This solution provides a pop up on the website, informing the user that Meta Pixel is being used.</p>
+                    <a href="http://" class="seeExample">See Example</a>
+                </div>
+                <div class="d-flex gap center">
+                    <f:link.action action="edit" class="back-img" arguments ="{gdprManager: gdprManager}" >
+                        <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/rightArrow.svg" />
+                    </f:link.action>
+                    <span class="d-flex gap" style="gap: 40px;">
+                       <span><b>Root Page ID</b> #{id}</span><span><b>Base URL:</b> <a href="{url}">{url}</a></span>
+                    </span>
+
+                </div>
+            </div>
+            <!-- accordion -->
+            <div class="custom-accordion">
+                <button type="button" class="accordion-toggle">
+                    <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/dropdown.svg" />
+                    Customize Content Mask
+                </button>
+                <div class="accordion-content">
+                    <div class="d-flex">
+                        <div class="uplodedImageTitle">
+                            <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image"
+                                extensionName="GdprExtensionsComMp" />
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <f:form.textfield property="enableBackgroundImage" id="enabledbackgroundImage" class="d-none" />
+                    </div>
+                    <div class="uploadImage d-none">
+                        <div class="file-upload-wrapper my-4-9" id="selected-image-container">
+                            <button class="choose_file">
+                                <f:translate key="choose.file" extensionName="GdprExtensionsComMp" />
+                                <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/upload.svg" alt="" class="" />
+                            </button>
+                            <input type="file" id="file-input" name="image" accept="image/*" class="file-upload-input btn-bg-transparent" />
+                        </div>
+                        <f:if condition="{gdprManager.backgroundImage} == ''">
+                            <f:then>
+                                <div class="uploaded-image upload-btn">
+                                    <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/gdpr-logo-icon.svg"
+                                        id="selected-image" alt="" class="back_img" />
+                                    <f:variable name="defaultImageUri"
+                                        value="{f:uri.image(src: 'EXT:gdpr_extensions_com_mp/Resources/Public/Icons/gdpr-logo-icon.svg')}" />
+
+                                </div>
+                            </f:then>
+                            <f:else>
+                                <div class="uploaded-image upload-btn">
+                                    <f:image src="{gdprManager.backgroundImage}" id="selected-image" alt="" class="back_img" />
+                                </div>
+                                <f:variable name="defaultImageUri"
+                                    value="{f:uri.image(src: 'EXT:gdpr_extensions_com_mp/Resources/Public/Icons/gdpr-logo-icon.svg')}" />
+
+                            </f:else>
+                        </f:if>
+                        <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/cancel.svg" alt="" class="cancel"
+                            onclick="resetToDefaultImage('{defaultImageUri}')" />
+                        <f:form.textarea property="backgroundImage" id="backgroundImage" cols="40" rows="15" class="d-none" />
+                        <br />
+                    </div>
+                    <div class="bg-color-parent d-block">
+                        <div class="bold">Color</div>
+                        <div class="d-flex gap center">
+                            <f:form.textfield property="backgroundImageColor" id="backgroundImageColor"
+                                class="my-4-9 pad-3-4 colorField field-style w-185px" style="display: none;" />
+
+                            <input type="color" id="favcolor" name="favcolor"
+                                value="{f:if(condition:'{gdprManager.backgroundImageColor}',then:'{gdprManager.backgroundImageColor}',else:'#FFFFFF')}"
+                                class="color-field bg-empty-color">
+
+                            <label for="backgroundImageColor">
+                                <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color"
+                                    extensionName="GdprExtensionsComMp" />
+                            </label><br />
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="accordion-toggle">
+                    <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/dropdown.svg" />
+                    Customize Button
+                </button>
+                <div class="accordion-content text-content">
+                    <div class="bold mt-2"> Button Color</div>
+                    <div class="d-flex gap center">
+                        <f:form.textfield property="buttonColor" id="buttonColor"
+                            class="my-4-9 pad-3-4 colorField field-style w-185px" style="display: none;" />
+                        <span class="pair-center">
+                            <input type="color" id="favcolor" name="favcolor"
+                                value="{f:if(condition:'{gdprManager.buttonColor}',then:'{gdprManager.buttonColor}',else:'#FFFFFF')}"
+                                class="color-field">
+                            <label for="buttonColor">
+                                <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color"
+                                    extensionName="GdprExtensionsComMp" />
+                            </label>
+                        </span>
+
+                        <span class="pair-center">
+                            <f:form.textfield property="buttonTextColor" id="buttonTextColor"
+                                class="my-4-9 pad-3-4 colorField field-style w-185px" style="display: none;" />
+                            <span class="color-span">
+                                <input type="color" id="buttonTextColor" name="favcolor"
+                                    value="{f:if(condition:'{gdprManager.buttonTextColor}',then:'{gdprManager.buttonTextColor}',else:'#000')}"
+                                    class="color-field">
+                            </span>
+                            <label for="buttonTextColor">
+                                <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text_color"
+                                    extensionName="GdprExtensionsComMp" />
+                            </label>
+
+                        </span>
+
+                    </div>
+                    <br />
+                    <div class="bold" for="buttonShape">
+                        <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_shape"
+                            extensionName="GdprExtensionsComMp" />
+                    </div>
+                    <div class="d-flex">
+                        <f:form.select name="buttonShape" property="buttonShape" class="field-style mt-5px w-185px">
+                            <f:form.select.option value="0">
+                                <f:translate key="shape.default" extensionName="GdprExtensionsComMp" />
+                            </f:form.select.option>
+                            <f:form.select.option value="round">
+                                <f:translate key="shape.round" extensionName="GdprExtensionsComMp" />
+                            </f:form.select.option>
+                            <f:form.select.option value="square">
+                                <f:translate key="shape.square" extensionName="GdprExtensionsComMp" />
+                            </f:form.select.option>
+                        </f:form.select>
+                    </div>
+                    <br />
+                    <div style="display: flex; flex-direction: column;" class="mb-2">
+                        <label class="bold" for="buttonText">
+                            Button Text
+                        </label>
+                        <f:form.textfield property="buttonText" id="buttonText"
+                            class="my-4-9 pad-3-4 colorField field-style w-185px" />
+                    </div>
+                </div>
+
+                <button type="button" class="accordion-toggle">
+                    <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/dropdown.svg" />
+                    Customize Message
+                </button>
+                <div class="accordion-content text-content">
+                    <div class="mt-2">
+                        <div class="bold" for="textColor">
+                            <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.text_color"
+                                extensionName="GdprExtensionsComMp" />
+                        </div>
+
+                        <div class="d-flex gap center">
+                            <f:form.textfield property="headingColor" id="headingColor"
+                                class="my-4-9 pad-3-4 colorField field-style w-185px" style="display: none;" />
+                            <span class="pair-center">
+                                <input type="color" id="favcolor" name="favcolor"
+                                    value="{f:if(condition:'{gdprManager.headingColor}',then:'{gdprManager.headingColor}',else:'#FFFFFF')}"
+                                    class="color-field">
+                                <label for="headingColor">
+                                    <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading_color"
+                                        extensionName="GdprExtensionsComMp" />
+                                </label>
+                            </span>
+                            <span class="pair-center">
+                                <f:form.textfield property="textColor" id="textColor"
+                                    class="my-4-9 pad-3-4 colorField field-style w-185px" style="display: none;" />
+                                <span class="color-span">
+                                    <input type="color" id="textColor" name="favcolor"
+                                        value="{f:if(condition:'{gdprManager.textColor}',then:'{gdprManager.textColor}',else:'#000')}"
+                                        class="color-field">
+                                </span>
+                                <label for="textColor">
+                                    <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.text_color"
+                                        extensionName="GdprExtensionsComMp" />
+                                </label>
+
+                            </span>
+
+                        </div>
+                        <div class="bold" for="heading">
+                            <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading"
+                                extensionName="GdprExtensionsComMp" />
+                        </div>
+                        <f:form.textfield property="heading" id="heading" class="my-4-9 pad-3-4 field-style" /><br />
+                        <div for="content" class="bold">
+                            <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.content"
+                                extensionName="GdprExtensionsComMp" />
+                        </div>
+                        <f:form.textarea property="content" id="content" cols="40" rows="15"
+                            class="my-4-9 pad-3-4 field-style" /><br />
+
+                    </div>
+                </div>
+                <button type="button" class="accordion-toggle">
+                    <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/dropdown.svg" />
+                    Meta Pixel Code
+                </button>
+                <div class="accordion-content text-content">
+                    <div class="mt-2">
+                        <f:form.textfield property="baseUrl" id="baseUrl" value ="{url}" class="my-4-9 pad-3-4 colorField field-style w-185px" style="display: none;" />
+                        <f:form.textfield property="siteId" id="siteId" value ="{id}" class="my-4-9 pad-3-4 colorField field-style w-185px" style="display: none;" />
+                        <f:form.textarea property="metaCode" id="metaCode" cols="40" rows="15" class="my-4-9 pad-3-4 field-style" /><br />
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="popUpoverlay" id="popUpoverlay"  style="display: none;">
+            <div class="popUp">
+                   <div class="popUp--content" id="beforeConsent">
+                        <h1>Heading</h1>
+                        <p>Maecenas fames lorem arcu cursus. Ac malesuada tellus elementum aliquet id proin. Natoque nisi est facilisi tincidunt a.
+                            Volutpat mollis et euismod magna ultricies blandit amet aliquam odio. Ornare fusce vitae dignissim urna sed at id id.
+                            Vulputate ac pellentesque urna magna vel mauris integer. Felis quam amet vivamus semper sollicitudin fermentum.</p>
+                        <div class="scroll">
+                            <div class="d-flex"style="justify-content:space-between; margin-top:0; align-items:center;">
+                                <p class="mb-0" style="color: #000;"><b>GPR-Extensions.com - Meta Pixel 2xClick Solution</b></p>
+                                <label class="switch mb-0">
+                                    <input type="checkbox" class="toggleButton track-btn-gdpr" id="0"
+                                        data-ext-title="gdpr_extensions_com_mp">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <p class="mb-0" >Third-party advertising services are used. If you agree here, personal data will be transferred to these providers
+                            </p>
+                        </div>
+                       <hr/>
+                        <div class="accept-all">
+                            <button type="button" id="acceptAllBtnMt" class="btn-bg btn-lg" style=" "> Confirm </button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <f:form.submit value="{f:translate(key:'save.btn', extensionName: 'GdprExtensionsComMp')}" class="btn btn-default btn-bg" id="savebtngdpr" />
+    </f:form>
+<script>
+    const backgroudImage = document.getElementById("backgroundImage");
+    const uploadImageUrl = document.getElementById("uploadImageUrl").innerText;
+
+    document.getElementById("file-input")?.addEventListener("change", handleFileSelect);
+
+    function handleFileSelect(event) {
+        const fileInput = event.target;
+        const selectedImageContainer = document.getElementById(
+            "selected-image-container"
+        );
+        const selectedImage = document.getElementById("selected-image");
+
+        const file = fileInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                selectedImage.src = e.target.result;
+                selectedImageContainer.style.display = "block";
+            };
+
+            reader.readAsDataURL(file);
+
+            const formData = new FormData();
+            formData.append("image", file);
+            formData.append("isAjax", 1);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", uploadImageUrl, true);
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    backgroudImage.value = response.url;
+                } else {
+                    console.log("Error");
+                }
+            };
+            xhr.send(formData);
+        } else {
+            selectedImageContainer.style.display = "none";
+        }
+    }
+
+    var checkbox = document.querySelector('.switch input[type="checkbox"]');
+
+    checkbox.addEventListener('change', function () {
+        toggle(this);
+    });
+
+    var colorPickers = document.querySelectorAll('.color-field');
+
+    // Loop through each color picker
+    colorPickers.forEach(function (picker) {
+        picker.addEventListener('change', function (e) {
+            var color = e.target.parentElement.parentElement.querySelector('.colorField');
+            color.value = e.target.value
+            console.log(color.value)
+        });
+    });
+
+    let enabledbackgroundImage = document.getElementById('enabledbackgroundImage');
+    let checkboxToggle = document.querySelector('.switch input');
+    let backgroundImageColor = document.querySelector('#backgroundImageColor');
+    let bgEmptyColor = document.querySelector('.bg-empty-color');
+
+    console.log(enabledbackgroundImage.value)
+    if (enabledbackgroundImage.value == 1) {
+        checkboxToggle.setAttribute('checked', true);
+        toggle('image')
+    } else if (enabledbackgroundImage.value == 0) {
+        toggle('bg-color')
+    }
+
+    function toggle(e) {
+        var uploadImageDiv = document.querySelector('.uploadImage');
+        var bgcolorDiv = document.querySelector('.bg-color-parent');
+        if (e.checked) {
+            uploadImageDiv.classList.remove('d-none');
+            uploadImageDiv.classList.add('d-flex');
+            bgcolorDiv.classList.remove('d-block');
+            bgcolorDiv.classList.add('d-none');
+            enabledbackgroundImage.value = 1
+            backgroundImageColor.value = "";
+            bgEmptyColor.value = '#000';
+        } else if (e.checked == false) {
+            uploadImageDiv.classList.remove('d-flex');
+            uploadImageDiv.classList.add('d-none');
+            bgcolorDiv.classList.add('d-block');
+            bgcolorDiv.classList.remove('d-none');
+            enabledbackgroundImage.value = 0
+        }
+
+        if (e == 'image') {
+            uploadImageDiv.classList.remove('d-none');
+            uploadImageDiv.classList.add('d-flex');
+            bgcolorDiv.classList.remove('d-block');
+            bgcolorDiv.classList.add('d-none');
+            backgroundImageColor.value = "";
+            bgEmptyColor.value = '#000';
+        }
+
+        if (e == 'bg-color') {
+            uploadImageDiv.classList.remove('d-flex');
+            uploadImageDiv.classList.add('d-none');
+            bgcolorDiv.classList.add('d-block');
+            bgcolorDiv.classList.remove('d-none');
+        }
+    }
+    //  accordion
+    var accToggles = document.getElementsByClassName("accordion-toggle");
+
+    function handleAccordionClick(event) {
+        var toggle = event.currentTarget;
+        var contentPanel = toggle.nextElementSibling;
+        var img = toggle.querySelector('.accordion-toggle img');
+
+        Array.from(accToggles).forEach(function (otherToggle) {
+            if (otherToggle !== toggle) {
+                otherToggle.classList.remove("active");
+                var otherImg = otherToggle.querySelector('img');
+                if (otherImg) {
+                    otherImg.style.transform = ''; // Reset rotation
+                }
+                otherToggle.nextElementSibling.style.maxHeight = null;
+            }
+        });
+
+        toggle.classList.toggle("active");
+        if (img) {
+            if (toggle.classList.contains('active')) {
+                img.style.transform = 'rotate(90deg)';
+            } else {
+                img.style.transform = '';
+            }
+            img.style.transition = 'transform 0.3s ease-in-out';
+        }
+
+        contentPanel.style.maxHeight = toggle.classList.contains('active') ? contentPanel.scrollHeight + "px" : null;
+
+        setTimeout(function () {
+            if (!toggle.classList.contains('active')) {
+                return;
+            }
+            toggle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
+    }
+
+    Array.from(accToggles).forEach(function (toggle) {
+        toggle.addEventListener("click", handleAccordionClick);
+    });
+
+
+    document.querySelector('.seeExample').addEventListener('click', function (event) {
+        event.preventDefault();
+        document.querySelector('.popUpoverlay').style.display = 'flex';
+    });
+
+
+    document.getElementById('popUpoverlay').addEventListener('click', function (event) {
+        if (event.target === document.getElementById('popUpoverlay')) {
+            document.getElementById('popUpoverlay').style.display = 'none';
+        }
+    });
+
+
+
+
+    function resetToDefaultImage(defaultImagePath) {
+        document.getElementById('selected-image').src = defaultImagePath;
+        document.getElementById('backgroundImage').value = '';
+    }
+
+
+</script>
+
+
+</f:section>
+</html>

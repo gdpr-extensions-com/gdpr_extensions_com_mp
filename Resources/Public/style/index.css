@@ -1,0 +1,249 @@
+.warpper {
+    display: flex;
+    flex-direction: column;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 0;
+    background: #EE7202;
+    display: inline-block;
+    color: #fff;
+    border-radius: 3px 3px 0px 0px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.panels {
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 4px;
+    min-height: 200px;
+    width: calc(100% - 45px);
+    margin-right: 5px;
+    overflow: hidden;
+    padding: 20px;
+    overflow: scroll;
+    height: 400px;
+}
+
+.panel {
+    display: none;
+    animation: fadein 0.8s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.panel-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.radio {
+    display: none;
+}
+
+#one:checked ~ .panels #one-panel,
+#two:checked ~ .panels #two-panel,
+#three:checked ~ .panels #three-panel {
+    display: block;
+}
+
+#one:checked ~ .tabs #one-tab,
+#two:checked ~ .tabs #two-tab,
+#three:checked ~ .tabs #three-tab {
+    background: #fff;
+    color: #000;
+    border-top: 3px solid #EE7202;
+}
+.d-flex {
+    display: flex;
+}
+.file-upload-wrapper {
+    position: relative;
+}
+.file-upload-wrapper .file-upload-input {
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+    width: 82px;
+}
+.my-4-9 {
+    margin: 4px 0px 9px 0;
+}
+.d-none {
+    display: none;
+}
+.file-upload-wrapper {
+    margin-top: -12px;
+}
+/* toggle btn */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 47px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 3px;
+    bottom: 2.5px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #EE7202;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #EE7202;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.uplodedImageTitle {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.pad-3-4 {
+    padding: 3px 4px;
+    outline: none;
+}
+.color-field {
+    margin-top: 3px;
+    padding: 0;
+    margin-left: 20px;
+}
+.uploadImage{
+    flex-direction: column;
+}
+.uploadImage-cookie{
+    flex-direction: column;
+}
+.uploadImage-cookie img{
+    width: 200px;
+    height: auto;
+    object-fit: contain;
+}
+.uploadImage img{
+    width: 200px;
+    height: auto;
+    object-fit: contain;
+}
+.field-style {
+    border-color: #D1D1D1;
+    border: 1px solid #D1D1D1;
+    border-radius: 6px;
+    padding: 6px 9px;
+    width: 340px;
+    outline: none;
+}
+.mt-5px {
+    margin-top: 5px;
+}
+input::-webkit-color-swatch {
+    border-color: red;
+    border: 0;
+}
+.color-span {
+    border-radius: 6px;
+    box-shadow: 0 0 6px rgba(0,0,0,.15);
+    height: 32px;
+    margin-left: 16px;
+    overflow: hidden;
+    width: 32px;
+    margin-top: 3px;
+}
+input[type="color"].color-field {
+    border: none;
+    cursor: pointer;
+    height: 41px;
+    left: -3px;
+    position: relative;
+    top: -7px;
+    width: 41px;
+    margin-left: 0;
+}
+.uploaded-image {
+    width: 350px;
+    height: 250px;
+    background-color: white;
+    box-shadow: 0px 0px 6px 0px #00000026;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cookie-icon {
+    width: 150px;
+    height: 100px;
+    background-color: white;
+    box-shadow: 0px 0px 6px 0px #00000026;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+}
+.cookie-icon img {
+    width: 70px;
+    height: auto;
+    object-fit: contain;
+}
+.btn-bg-transparent {
+    background: transparent;
+    border-radius: 6px;
+    border: 1px solid #EE7202;
+    color: #EE7202;
+    padding: 8px 17px;
+    margin-top: 12px;
+    width: 108px;
+}
+.w-185px {
+    width: 185px;
+}

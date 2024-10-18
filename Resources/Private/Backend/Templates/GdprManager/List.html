@@ -1,0 +1,430 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+This template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Backend:
+        Templates:
+          GdprManager:
+            List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="Buttons">
+<!--    <be:moduleLayout.button.linkButton-->
+<!--        icon="actions-add"-->
+<!--        title="{f:translate(id: 'LLL:EXT:backend/Resources/Private/Language/locallang_layout.xlf:newRecordGeneral')}"-->
+<!--        link="{f:uri.action(controller: 'GdprManager', action: 'new')}"-->
+<!--    />-->
+</f:section>
+
+
+<f:section name="Content">
+
+  <style>
+      .warpper {
+          display: flex;
+          flex-direction: column;
+      }
+
+      .tab {
+          cursor: pointer;
+          padding: 10px 20px;
+          margin: 0;
+          background: #EE7202;
+          display: inline-block;
+          color: #fff;
+          border-radius: 3px 3px 0px 0px;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      }
+
+      @keyframes fadein {
+          from {
+              opacity: 0;
+          }
+          to {
+              opacity: 1;
+          }
+      }
+
+      .panel-title {
+          font-size: 1.5em;
+          font-weight: bold;
+      }
+
+      .radio {
+          display: none;
+      }
+
+      #one:checked ~ .panels #one-panel,
+      #two:checked ~ .panels #two-panel,
+      #three:checked ~ .panels #three-panel {
+          display: block;
+      }
+
+      #one:checked ~ .tabs #one-tab,
+      #two:checked ~ .tabs #two-tab,
+      #three:checked ~ .tabs #three-tab {
+          background: #fff;
+          color: #000;
+          border-top: 3px solid #EE7202;
+      }
+      .d-flex {
+          display: flex;
+      }
+      .file-upload-wrapper {
+          position: relative;
+      }
+      .file-upload-wrapper .file-upload-input {
+          position: absolute;
+          left: 0;
+          opacity: 0;
+          z-index: 1;
+          cursor: pointer;
+          width: 82px;
+      }
+      .my-4-9 {
+          margin: 4px 0px 9px 0;
+      }
+      .d-none {
+          display: none;
+      }
+      .file-upload-wrapper {
+          margin-top: -12px;
+      }
+      /* toggle btn */
+      .switch {
+          position: relative;
+          display: inline-block;
+          width: 47px;
+          height: 20px;
+      }
+
+      .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+
+      .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          -webkit-transition: .4s;
+          transition: .4s;
+      }
+
+      .slider:before {
+          position: absolute;
+          content: "";
+          height: 15px;
+          width: 15px;
+          left: 3px;
+          bottom: 2.5px;
+          background-color: white;
+          -webkit-transition: .4s;
+          transition: .4s;
+      }
+
+      input:checked + .slider {
+          background-color: #EE7202;
+      }
+
+      input:focus + .slider {
+          box-shadow: 0 0 1px #EE7202;
+      }
+
+      input:checked + .slider:before {
+          -webkit-transform: translateX(26px);
+          -ms-transform: translateX(26px);
+          transform: translateX(26px);
+      }
+
+      .uploadImage-cookie{
+          flex-direction: column;
+          margin-bottom: 20px;
+      }
+      .uploadImage-cookie img{
+          width: 200px;
+          height: auto;
+          object-fit: contain;
+      }
+      .uploadImage img{
+          width: 200px;
+          height: auto;
+          object-fit: contain;
+      }
+      .field-style {
+          border-color: #D1D1D1;
+          border: 1px solid #D1D1D1;
+          border-radius: 6px;
+          padding: 6px 9px;
+          width: 340px;
+          outline: none;
+      }
+      .mt-5px {
+          margin-top: 5px;
+      }
+      input::-webkit-color-swatch {
+          border-color: red;
+          border: 0;
+      }
+
+      input[type="color"].color-field {
+          border: none;
+          cursor: pointer;
+          height: 41px;
+          left: -3px;
+          position: relative;
+          top: -7px;
+          width: 41px;
+          margin-left: 0;
+      }
+
+      .cookie-icon {
+          width: 150px;
+          height: 100px;
+          background-color: white;
+          box-shadow: 0px 0px 6px 0px #00000026;
+          border-radius: 6px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 5px;
+      }
+      .cookie-icon img {
+          width: 100%;
+          max-width: 75px;
+          height: auto;
+          object-fit: contain;
+      }
+      .btn-bg-transparent {
+          background: transparent;
+          border-radius: 6px;
+          border: 1px solid #EE7202;
+          color: #EE7202;
+          padding: 8px 17px;
+          margin-top: 12px;
+          width: 108px;
+      }
+      .btn-bg {
+          background: #EE7202;
+          border-radius: 6px;
+          border: 1px solid #EE7202;
+          color: #fff;
+          padding: 8px 17px;
+          margin-top: 12px;
+          cursor: pointer;
+      }
+      .mb-5 {
+          margin-bottom: 5px;
+      }
+      hr {
+          margin-top: 25px;
+          margin-bottom: 25px;
+          height: 1px;
+          border: 0;
+          background: #d7d5d5;
+      }
+      .w-185px {
+          width: 185px;
+      }
+      .success-continer {
+          position: absolute;
+          top: 22px;
+          right: 0;
+          width: 225px;
+          padding: 8px 21px;
+          background: white;
+          box-shadow: 0px 0px 6px 0px #00000026;
+          border-top-left-radius: 6px;
+          border-bottom-left-radius: 6px;
+          align-items: center;
+      }
+      .success-continer img {
+          margin-right: 14px;
+          width: 24px;
+          height: 24px;
+      }
+
+  </style>
+    <h1><f:translate key="gdpr.twoclick.desc" extensionName="GdprExtensionsComMp" /></h1>
+
+
+    <div class="uploadImage-cookie ">
+        <label for="cookieWidgetImage">
+            <f:translate key="tx_GdprTwoXMatomo_domain_model_gdprmanager.cookie_widget_image" extensionName="GdprExtensionsComMp" />
+        </label><br />
+        <f:if condition="{cookieWidgetData.cookie_widget_image} == ''">
+            <f:then>
+                <div class="cookie-icon">
+                    <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/Extension.svg" id="selected-image-cookie"
+                             alt=""
+                             class="back_img" />
+                </div>
+
+            </f:then>
+            <f:else>
+                <div class="cookie-icon">
+                    <f:image src="{cookieWidgetData.cookie_widget_image}" id="selected-image-cookie"
+                             alt=""
+                             class="back_img" />
+                </div>
+            </f:else>
+        </f:if>
+        <f:form.textarea name="cookieWidgetImage" id="cookieWidgetImage" cols="40" rows="15" value="{cookieWidgetData.cookie_widget_image}" class="d-none" /><br />
+        <div class="file-upload-wrapper my-4-9" id="selected-image-container-cookie">
+            <button class="choose_file btn-bg-transparent" ><f:translate key="choose.file" extensionName="GdprExtensionsComMp" /></button>
+            <input
+                type="file"
+                id="file-input-cookie"
+                name="image"
+                accept="image/*"
+                class="file-upload-input btn-bg-transparent"
+            />
+        </div>
+    </div>
+    <label for="cookieWidgetPosition" class="mt-5px">
+        <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_position" extensionName="GdprExtensionsComMp" />
+    </label><br />
+    <div class="d-flex">
+        <f:form.select name="cookieWidgetPosition" id="cookieWidgetPosition" class="field-style mt-5px w-185px">
+            <f:form.select.option value="left"><f:translate key="select.left" extensionName="GdprExtensionsComMp" /></f:form.select.option>
+            <f:form.select.option value="right"><f:translate key="select.right" extensionName="GdprExtensionsComMp" /></f:form.select.option>
+        </f:form.select>
+    </div>
+    <button type="button" id="btnCookieWidget" class="btn-bg mt-5px"><f:translate key="save.btn" extensionName="GdprExtensionsComMp" /></button>
+
+
+
+    <f:flashMessages />
+    <hr />
+    <p class="mb-5"><f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.extension_title" extensionName="GdprExtensionsComMp" /></p>
+    <select class="pad-3 field-style ext-names">
+        <option value="0"><f:translate key="select.text" extensionName="GdprExtensionsComMp" /></option>
+      <f:for each="{gdprManagers}" as="gdprManager">
+        <option value="{f:uri.action(controller: 'GdprManager', action: 'edit', arguments: {gdprManager: gdprManager})}">{gdprManager.extensionTitle}</option>
+      </f:for>
+    </select>
+    <div class="success-continer d-none">
+        <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/success.gif" alt="success" class="success-img" />
+        <p><f:translate key="changes.success" extensionName="GdprExtensionsComMp" /></p>
+    </div>
+
+
+    <!-- <f:link.action action="new" class="btn btn-default">New GdprManager</f:link.action> -->
+    <script>
+      var select = document.querySelector('.ext-names');
+      select.addEventListener('change', function() {
+        var url = this.value;
+        if(url != 0) {
+          window.location.href = url;
+        }
+      });
+
+
+      const cookieWidgetImage = document.getElementById("cookieWidgetImage");
+      const cookieWidgetPosition = document.getElementById("cookieWidgetPosition");
+      const btnCookieWidget = document.getElementById("btnCookieWidget");
+      const uploadImageUrl = '<f:format.raw>{uploadImageUrl}</f:format.raw>';
+      const successContiner = document.querySelector('.success-continer');
+
+
+
+      btnCookieWidget.addEventListener('click', function(event) {
+
+          const cookieWidgetPositionSelect = document.getElementById("cookieWidgetPosition");
+          const cookieWidgetImageTextarea = document.getElementById("cookieWidgetImage");
+
+          let cookieWidgetPositionValue = cookieWidgetPositionSelect.value;
+          let cookieWidgetImageValue = cookieWidgetImageTextarea.value;
+
+          const formData = new FormData();
+          formData.append("cookieWidgetImageValue", cookieWidgetImageValue);
+          formData.append("cookieWidgetPositionValue", cookieWidgetPositionValue);
+          formData.append("forCookie", 1);
+
+          const xhr = new XMLHttpRequest();
+          xhr.open("POST", uploadImageUrl, true);
+          xhr.setRequestHeader("Accept", "application/json");
+          xhr.onload = () => {
+              if (xhr.status === 200) {
+                  const response = JSON.parse(xhr.responseText);
+                  if(response.status == true) {
+                      successContiner.classList.remove('d-none');
+                      successContiner.classList.add('d-flex');
+                      setTimeout(()=>{
+                          successContiner.classList.add('d-none');
+                          successContiner.classList.remove('d-flex');
+                      }, 2000)
+                  }
+
+              } else {
+                  console.log("Error");
+              }
+          };
+          xhr.send(formData);
+
+      });
+
+
+      document.getElementById("file-input-cookie")?.addEventListener("change", handleFileSelectCookie);
+
+      function handleFileSelectCookie(event) {
+          const fileInput = event.target;
+          const selectedImageContainer = document.getElementById(
+              "selected-image-container-cookie"
+          );
+          const selectedImage = document.getElementById("selected-image-cookie");
+
+          const file = fileInput.files[0];
+
+          if (file) {
+              const reader = new FileReader();
+
+              reader.onload = function (e) {
+                  selectedImage.src = e.target.result;
+                  selectedImageContainer.style.display = "block";
+              };
+
+              reader.readAsDataURL(file);
+
+              const formData = new FormData();
+              formData.append("image", file);
+              formData.append("isAjax", 1);
+
+              const xhr = new XMLHttpRequest();
+              xhr.open("POST", uploadImageUrl, true);
+              xhr.setRequestHeader("Accept", "application/json");
+              xhr.onload = () => {
+                  if (xhr.status === 200) {
+                      const response = JSON.parse(xhr.responseText);
+                      cookieWidgetImage.value = response.url;
+                  } else {
+                      console.log("Error");
+                  }
+              };
+              xhr.send(formData);
+          } else {
+              selectedImageContainer.style.display = "none";
+          }
+      }
+
+
+
+
+    </script>
+</f:section>
+</html>

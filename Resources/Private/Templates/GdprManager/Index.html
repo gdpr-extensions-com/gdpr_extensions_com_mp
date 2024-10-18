@@ -1,0 +1,53 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+This template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        GdprManager:
+          Index.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="content">
+    <h1><f:translate key="list.gdpr.manager" extensionName="GdprExtensionsComMp" /></h1>
+    <f:flashMessages />
+
+    <table class="tx_gdprextensionscomyoutube">
+        <tr>
+            <th><f:translate key="tx_GdprTwoXMatomo_domain_model_gdprmanager.heading" extensionName="GdprExtensionsComMp" /></th>
+            <th><f:translate key="tx_GdprTwoXMatomo_domain_model_gdprmanager.content" extensionName="GdprExtensionsComMp" /></th>
+            <th><f:translate key="tx_GdprTwoXMatomo_domain_model_gdprmanager.button_text" extensionName="GdprExtensionsComMp" /></th>
+            <th><f:translate key="tx_GdprTwoXMatomo_domain_model_gdprmanager.enable_background_image" extensionName="GdprExtensionsComMp" /></th>
+            <th><f:translate key="tx_GdprTwoXMatomo_domain_model_gdprmanager.background_image" extensionName="GdprExtensionsComMp" /></th>
+            <th><f:translate key="tx_GdprTwoXMatomo_domain_model_gdprmanager.background_image_color" extensionName="GdprExtensionsComMp" /></th>
+            <th><f:translate key="tx_GdprTwoXMatomo_domain_model_gdprmanager.button_color" extensionName="GdprExtensionsComMp" /></th>
+            <th><f:translate key="tx_GdprTwoXMatomo_domain_model_gdprmanager.text_color" extensionName="GdprExtensionsComMp" /></th>
+            <th><f:translate key="tx_GdprTwoXMatomo_domain_model_gdprmanager.button_shape" extensionName="GdprExtensionsComMp" /></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <f:for each="{gdprManagers}" as="gdprManager">
+            <tr>
+                <td><f:link.action action="show" arguments="{gdprManager : gdprManager}">{gdprManager.heading}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{gdprManager : gdprManager}">{gdprManager.content}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{gdprManager : gdprManager}">{gdprManager.buttonText}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{gdprManager : gdprManager}">{gdprManager.enableBackgroundImage}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{gdprManager : gdprManager}">{gdprManager.backgroundImage}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{gdprManager : gdprManager}">{gdprManager.backgroundImageColor}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{gdprManager : gdprManager}">{gdprManager.buttonColor}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{gdprManager : gdprManager}">{gdprManager.textColor}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{gdprManager : gdprManager}">{gdprManager.buttonShape}</f:link.action></td>
+                <td><f:link.action action="edit" arguments="{gdprManager : gdprManager}"><f:translate key="edit.btn" extensionName="GdprExtensionsComMp" /></f:link.action></td>
+                <td><f:link.action action="delete" arguments="{gdprManager : gdprManager}"><f:translate key="delete.btn" extensionName="GdprExtensionsComMp" /></f:link.action></td>
+            </tr>
+        </f:for>
+    </table>
+
+    <f:link.action action="new"><f:translate key="new.gdpr" extensionName="GdprExtensionsComMp" /></f:link.action>
+</f:section>
+</html>

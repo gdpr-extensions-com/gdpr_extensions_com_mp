@@ -1,0 +1,15 @@
+
+module.tx_gdprextensionscommp_gdprmanager {
+    view {
+        # cat=module.tx_gdprextensionscommp_gdprmanager/file; type=string; label=Path to template root (BE)
+        templateRootPath = EXT:gdpr_extensions_com_mp/Resources/Private/Backend/Templates/
+        # cat=module.tx_gdprextensionscommp_gdprmanager/file; type=string; label=Path to template partials (BE)
+        partialRootPath = EXT:gdpr_extensions_com_mp/Resources/Private/Backend/Partials/
+        # cat=module.tx_gdprextensionscommp_gdprmanager/file; type=string; label=Path to template layouts (BE)
+        layoutRootPath = EXT:gdpr_extensions_com_mp/Resources/Private/Backend/Layouts/
+    }
+    persistence {
+        # cat=module.tx_gdprextensionscomyoutube_gdprmanager//a; type=string; label=Default storage PID
+        storagePid =
+    }
+}

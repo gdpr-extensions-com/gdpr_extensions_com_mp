@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+{namespace my=GdprExtensionsCom\GdprExtensionsComMp\ViewHelpers}
+<head>
+    <meta charset="UTF-8">
+    <title><f:translate key="title.txt" extensionName="GdprExtensionsComMp" /></title>
+</head>
+
+<body>
+<style type="text/css">
+    #gdpr-extensions-com-cookie-container .gdprInner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-height: 600px;
+    }
+
+    #gdpr-extensions-com-cookie-container div.privacy-msg {
+        max-width: 1020px;
+        padding: 18px;
+        width: 100% !important;
+        height: 100% !important;
+        position: relative;
+        max-height: 500px;
+        margin: 30px;
+    }
+
+    #gdpr-extensions-com-cookie-container div.privacy-msg .wraper {
+        width: 100%;
+        border-radius: 6px;
+        padding: 6% 85px;
+        text-align: center;
+        -webkit-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        -moz-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        height: 100%;
+        position: relative;
+        /* display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; */
+    }
+
+    #gdpr-extensions-com-cookie-container .checkbox-label {
+        display: flex;
+        justify-content: center;
+    }
+
+    #gdpr-extensions-com-cookie-container .link-action {
+        display: block;
+        background: #ee7202;
+        color: white;
+        padding: 8px 23px;
+        width: fit-content;
+        margin: 20px auto;
+    }
+
+    #gdpr-extensions-com-cookie-container .link-action.square {
+        border-radius: 6px!important;
+    }
+
+    #gdpr-extensions-com-cookie-container .link-action.round {
+        border-radius: 100px!important;
+    }
+
+    #gdpr-extensions-com-cookie-container .link-action:hover {
+        color: white;
+    }
+
+    #gdpr-extensions-com-cookie-container .checkbox-label input {
+        margin-right: 12px
+    }
+
+    #gdpr-extensions-com-cookie-container .wraper .bg-image {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        border-radius: 6px;
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    /* for widget*/
+    .gdpr-extensions-com-cookie-fab-mo {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        color: white;
+        font-size: 48px;
+        text-align: center;
+
+        /* Positioning Properties */
+        position: fixed;
+        /* Use 'absolute' if it should be relative to its nearest positioned ancestor (instead of relative to the viewport) */
+        bottom: 20px;
+        /* Space from the bottom */
+        left: 20px;
+        /* Space from the left */
+    }
+
+    .gdpr-extensions-com-cookie-fab-mo.right {
+        right: 20px;
+        left: unset;
+    }
+
+    #gdpr-extensions-com-cookie-model.modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+    #gdpr-extensions-com-cookie-track-model.trackmodal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    #gdpr-extensions-com-cookie-model .modal-content , #gdpr-extensions-com-cookie-track-model .track-modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px 0;
+        border: 1px solid #888;
+        width: 30%;
+        border-radius: 6px;
+    }
+
+    .mb-0 {
+        margin-bottom: 0;
+    }
+
+    #gdpr-extensions-com-cookie-model .title, #gdpr-extensions-com-cookie-track-model .title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 11px;
+        margin: 0 16px 16px 16px;
+    }
+
+    #gdpr-extensions-com-cookie-model .close ,#gdpr-extensions-com-cookie-track-model .trackclose {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        BACKGROUND: #dad9da;
+        COLOR: black;
+        PADDING: 15px 6px 13px 6px;
+        line-height: 0;
+        border-radius: 3px;
+
+    }
+
+    #gdpr-extensions-com-cookie-model .cookie-section, #gdpr-extensions-com-cookie-track-model .track-cookie-section {
+        padding: 22px 11px;
+        background: #ffe8d8;
+        border-radius: 6px;
+        margin: 0 16px 20px 16px;
+    }
+
+    #gdpr-extensions-com-cookie-model .cookie-section .cookie-inner , #gdpr-extensions-com-cookie-track-model .track-cookie-section .cookie-inner {
+        margin-bottom: 13px;
+    }
+
+    #gdpr-extensions-com-cookie-model .cookie-section p ,#gdpr-extensions-com-cookie-track-model .track-cookie-section p {
+        margin-top: 0;
+    }
+
+    #gdpr-extensions-com-cookie-model .close:hover,
+    #gdpr-extensions-com-cookie-model .close:focus,
+    #gdpr-extensions-com-cookie-track-model .close:hover,
+    #gdpr-extensions-com-cookie-track-model .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    #gdpr-extensions-com-cookie-model .switch, #gdpr-extensions-com-cookie-track-model .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 22px;
+    }
+
+    #gdpr-extensions-com-cookie-model .switch input, #gdpr-extensions-com-cookie-track-model .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    #gdpr-extensions-com-cookie-model .slider, #gdpr-extensions-com-cookie-track-model .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 34px;
+        /* This line makes the slider rounded */
+    }
+
+    #gdpr-extensions-com-cookie-model .btn-lg , #gdpr-extensions-com-cookie-track-model .btn-lg {
+        background: #EE7202;
+        border-radius: 6px;
+        border: 1px solid #EE7202;
+        color: #fff;
+        padding: 8px 17px;
+        cursor: pointer;
+        margin-top: 0;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    #gdpr-extensions-com-cookie-model .btn-lg.disabled , #gdpr-extensions-com-cookie-track-model .btn-lg.disabled {
+        background: #dad9da;
+        color: black;
+        cursor: default;
+        border-color: #dad9da;
+    }
+
+    #gdpr-extensions-com-cookie-model .slider:before, #gdpr-extensions-com-cookie-track-model .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
+        /* This line makes the button inside the slider rounded */
+    }
+
+    #gdpr-extensions-com-cookie-model input:checked+.slider, #gdpr-extensions-com-cookie-track-model input:checked+.slider {
+        background-color: #ee7202;
+    }
+
+    #gdpr-extensions-com-cookie-model input:focus+.slider, #gdpr-extensions-com-cookie-track-model input:focus+.slider {
+        box-shadow: 0 0 1px #ee7202;
+    }
+
+    #gdpr-extensions-com-cookie-model input:checked+.slider:before, #gdpr-extensions-com-cookie-track-model input:checked+.slider:before {
+        -webkit-transform: translateX(28px);
+        -ms-transform: translateX(28px);
+        transform: translateX(28px);
+    }
+
+    .d-flex {
+        display: flex !important;
+    }
+
+    .justify-content-btw {
+        justify-content: space-between !important;
+    }
+
+    .align-items-ctr {
+        align-items: center !important;
+    }
+
+    #gdpr-inner:not(.gdprInner) iframe {
+        height: 100vh;
+    }
+    #gdpr-extensions-com-cookie-container .bgComtainer-image .overlay {
+        position: absolute;
+        content: '';
+        background: black;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        opacity: 0.3;
+    }
+    #gdpr-extensions-com-cookie-model .accept-all, #gdpr-extensions-com-cookie-track-model .accept-all {
+        padding: 20px 11px 4px 11px;
+        box-shadow: rgba(0, 0, 0, 0.06) 0px -2px 3px;
+        display: flex;
+        justify-content: center;
+    }
+    #gdpr-extensions-com-cookie-model .scroll ,#gdpr-extensions-com-cookie-track-model .scroll {
+        max-height: 410px;
+        overflow-y: auto;
+    }
+</style>
+{my:getTwoClickSolutions() -> f:variable(name: 'twoClickSol')}
+{my:getTwoClickTrackingSolutions() -> f:variable(name: 'twoClickTrackSol')}
+<f:variable name="decodedArray" value="{twoClickSol -> v:format.json.decode()}" />
+<f:variable name="decodedTrackArray" value="{twoClickTrackSol -> v:format.json.decode()}" />
+
+
+<img src="{cookieWidgetData.cookie_widget_image}"
+     class="gdpr-extensions-com-cookie-fab-mo <f:format.raw>{cookieWidgetData.cookie_widget_position}</f:format.raw>" />
+<div id="gdpr-extensions-com-cookie-model" class="modal">
+    <div class="modal-content">
+        <div class="title">
+            <p><b><f:translate key="gdpr.twoclick.consent" extensionName="GdprExtensionsComMp" /></b></p>
+            <span class="close">&times;</span>
+        </div>
+        <div class="scroll">
+            <f:for each="{decodedArray}" as="sol" iteration="i">
+                <div class="cookie-section">
+                    <div class="d-flex justify-content-btw align-items-ctr cookie-inner">
+                        <p class="mb-0"><b>{sol.extensionTitle}</b></p>
+                        <label class="switch mb-0">
+                            <input type="checkbox" class="toggleButton" id="{i.index}"
+                                   data-ext-title="<f:format.raw>{sol.extensionKey}_{rootPid}</f:format.raw>">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p class="mb-0"><f:translate key="gdpr.twoclick.consent.desc" extensionName="GdprExtensionsComMp" /></p>
+                </div>
+            </f:for>
+        </div>
+        <div class="accept-all">
+            <button type="button" class="btn-lg"><f:translate key="gdpr.accept.all" extensionName="GdprExtensionsComMp" /></button>
+        </div>
+
+    </div>
+</div>
+<div id="gdpr-extensions-com-cookie-track-model" class="trackmodal">
+    <div class="track-modal-content">
+        <div class="title">
+            <p><b><f:translate key="gdpr.twoclick.consent" extensionName="GdprExtensionsComMp" /></b></p>
+            <span class="trackclose">&times;</span>
+        </div>
+        <div class="scroll">
+            <f:for each="{decodedTrackArray}" as="tracksol" iteration="i">
+                <div class="track-cookie-section">
+                    <div class="d-flex justify-content-btw align-items-ctr cookie-inner">
+                        <p class="mb-0"><b>{tracksol.extensionTitle}</b></p>
+                        <label class="switch mb-0">
+                            <input type="checkbox" class="toggleButton" id="{i.index}"
+                                   data-ext-title="<f:format.raw>{tracksol.extensionKey}_{rootPid}</f:format.raw>">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <p class="mb-0"><f:translate key="gdpr.twoclick.consent.desc" extensionName="GdprExtensionsComMp" /></p>
+                </div>
+            </f:for>
+        </div>
+        <div class="accept-all">
+            <button type="button" class="btn-lg"><f:translate key="gdpr.accept.all" extensionName="GdprExtensionsComMp" /></button>
+        </div>
+
+    </div>
+</div>
+
+<f:asset.script identifier="2ClickSol">
+
+    /*
+
+    _2ClickIframePrivacy Class contains methods for handling user consent about cookies.
+
+    It internally uses cookies to remember user choices about privacy settings.
+
+    Classes:
+    - privacy-msg: Used to style privacy message displayed within iframe
+    - toggleButton : Used by buttons which enables/disables specific services
+
+    Methods:
+    - setConsentStatus(service,status) : Sets the consent status for a service and stores it as a cookie.
+    - deleteCookie(name) : Deletes the specified cookie.
+    - getConsentStatuses(): Returns a JSON object representing all the cookies whose consent was obtained.
+    - wrap(el, wrapper, type, text, heading): Adds 'privacy-msg' div element inside an iframe containing info about data security and obtain user’s consent
+    - EnableContent(type): Enables the iframe content once user provides consent.
+    - DisableContent(type,e): Disables the iframe content if user withdraws consent.
+    - Init(UserConfig) : Initializes the instance with user provided configurations.
+
+    Properties:
+
+    - consentCookieName: Specifies the name of the cookie used for preserving user consent settings
+    - toggleButtons: Represents all buttons which enables/disables specific services.
+    - consentStatuses: Stores the statuses of users' consent for cookies
+
+    */
+
+    let arr = JSON.parse('<f:format.raw>{twoClickSol}</f:format.raw>');
+    console.log(arr);
+    document.addEventListener('DOMContentLoaded', () => {
+    _2ClickIframePrivacy.init('', arr)
+    });
+    let switchs = document.querySelectorAll('.switch .toggleButton');
+    if (switchs.length !== 0) {
+    // let acceptBtn = document.querySelector('.accept-all .btn-lg');
+    // acceptBtn.addEventListener('click', function () {
+    //     switchs.forEach((item, index) => {
+    //         if (item.checked != true) {
+    //             item.click();
+    //             acceptBtn.disabled = true;
+    //             acceptBtn.classList.add('disabled');
+    //         }
+    //     })
+    // })
+    }
+
+    //////////////////////Special One time PopUp///////////////////////////
+    document.addEventListener('DOMContentLoaded', () => {
+    const popUpShownMt = localStorage.getItem('popUpShownMt');
+    const popUpShownGt = localStorage.getItem('popUpShownGt');
+    const popUpShownMp = localStorage.getItem('popUpShownMp');
+
+
+    if (!popUpShownMt) {
+    const trackModalMt = document.getElementById("gdpr-extensions-com-cookie-track-model-mt");
+
+    if (trackModalMt) {
+    trackModalMt.style.display = "block";
+    localStorage.setItem('popUpShownMt', true);
+    }
+
+    }
+
+    if(!popUpShownGt){
+    const trackModalGt = document.getElementById("gdpr-extensions-com-cookie-track-model-gt");
+    if (trackModalGt) {
+
+    trackModalGt.style.display = "block";
+    localStorage.setItem('popUpShownGt', true);
+    }
+    }
+
+    if (!popUpShownMp) {
+    const trackModalMp = document.getElementById("gdpr-extensions-com-cookie-track-model-mp");
+
+    if (trackModalMp) {
+    trackModalMp.style.display = "block";
+    localStorage.setItem('popUpShownMp', true);
+    }
+
+    }
+    });
+
+    const acceptBtntrack = document.querySelector('.accept-all .btn-lg');
+    if (acceptBtntrack) {
+    // acceptBtntrack.addEventListener('click', () => {
+    //const switchs = document.querySelectorAll('.switch .toggleButton');
+    //switchs.forEach((item) => {
+    //if (!item.checked) {
+    //item.click();
+    // acceptBtntrack.disabled = true;
+    //acceptBtntrack.classList.add('disabled');
+    //}
+    // });
+    // });
+
+    const spackTrack = document.querySelector('.trackclose');
+    const acceptAllBtnMt = document.getElementById('acceptAllBtnMt');
+    const acceptAllBtnGt = document.getElementById('acceptAllBtnGt');
+    const acceptAllBtnMp = document.getElementById('acceptAllBtnMp');
+
+    if(acceptAllBtnMt){
+    acceptAllBtnMt.addEventListener("click" ,()=>{
+    spackTrack.click();
+    })
+    }
+
+    const spackTrackGt = document.querySelector('.trackcloseGt');
+
+    if(acceptAllBtnGt){
+    acceptAllBtnGt.addEventListener("click" ,()=>{
+    spackTrackGt.click();
+    })
+    }
+
+    if(spackTrackGt){
+    spackTrackGt.onclick = function () {
+
+    const trackModalGt = document.getElementById("gdpr-extensions-com-cookie-track-model-gt");
+
+    if(trackModalGt){
+    trackModalGt.style.display = "none";
+    }
+
+    };
+    }
+
+    const spackTrackMp = document.querySelector('.trackcloseMp');
+
+    if(acceptAllBtnMp){
+    acceptAllBtnMp.addEventListener("click" ,()=>{
+    spackTrackMp.click();
+    })
+    }
+
+    if(spackTrackMp){
+    spackTrackMp.onclick = function () {
+
+    const trackModalMp = document.getElementById("gdpr-extensions-com-cookie-track-model-mp");
+
+    if(trackModalMp){
+    trackModalMp.style.display = "none";
+    }
+
+    };
+    }
+
+    if(spackTrack){
+
+    spackTrack.onclick = function () {
+    const trackModalMt = document.getElementById("gdpr-extensions-com-cookie-track-model-mt");
+
+    if(trackModalMt){
+    trackModalMt.style.display = "none";
+
+    }
+
+    };
+    }
+
+
+    window.onclick = function (event) {
+    const trackModalMt = document.getElementById("gdpr-extensions-com-cookie-track-model-mt");
+    const trackModalGt = document.getElementById("gdpr-extensions-com-cookie-track-model-gt");
+    const trackModalMp = document.getElementById("gdpr-extensions-com-cookie-track-model-mp");
+
+    if (event.target == trackModalMt) {
+    trackModalMt.style.display = "none";
+    }
+    if (event.target == trackModalGt) {
+    trackModalGt.style.display = "none";
+    }
+    if (event.target == trackModalMp) {
+    trackModalMp.style.display = "none";
+    }
+    };
+    }
+
+    //////////////////////Special One time PopUp//////////////////////////
+
+    for (let sol in arr) {
+
+    let solSetting = arr[sol];
+
+
+    var modal = document.getElementById("gdpr-extensions-com-cookie-model");
+    if (modal) {
+    var btn = document.querySelectorAll(".gdpr-extensions-com-cookie-fab-mo");
+    var span = document.getElementsByClassName("close")[0];
+    btn.forEach((item, index) => {
+    item.addEventListener('click', function () {
+    modal.style.display = "block";
+    })
+    })
+
+
+    span.onclick = function () {
+    modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+    if (event.target == modal) {
+    modal.style.display = "none";
+    }
+    }
+    }
+
+
+    var _2ClickIframePrivacy = new function () {
+
+    var consentCookieName = 'GDPR_Extensions_2ClickCookieConsent';
+    var toggleButtons = document.getElementsByClassName("toggleButton");
+    let gdprInner = document.getElementById('gdpr-inner')
+
+
+    // Initialize consent statuses:
+    var consentStatuses = getConsentStatuses();
+
+    var config = {
+    enableCookies: true,
+    useSessionCookie: true,
+    cookieNamespace: '_2ClickIPEnable-',
+    showContentLabel: 'Inhalt anzeigen',
+    rememberChoiceLabel: 'Auswahl merken',
+    privacyPolicyLabel: 'Datenschutzerklärung',
+    privacyPolicyUrl: false
+    };
+
+    this.types = new Array(
+    {
+    type: 'video',
+    description: solSetting.content,
+    heading: solSetting.heading,
+    btnColor: solSetting.button_color,
+    textColor: solSetting.text_color,
+    imagePath: solSetting.background_image,
+    imageStatus: solSetting.enable_background_image,
+    bgColor: solSetting.background_image_color,
+    buttonTextColor: solSetting.button_text_color,
+    btnText: solSetting.button_text,
+    btnShape: solSetting.button_shape,
+    },
+    {
+    type: 'map',
+    description: solSetting.content,
+    heading: solSetting.heading,
+    btnColor: solSetting.button_color,
+    textColor: solSetting.text_color,
+    imagePath: solSetting.background_image,
+    imageStatus: solSetting.enable_background_image,
+    bgColor: solSetting.background_image_color,
+    buttonTextColor: solSetting.button_text_color,
+    btnText: solSetting.button_text,
+    btnShape: solSetting.button_shape,
+    },
+    {
+    type: 'calendar',
+    description: '<f:format.raw>{YoutubeSettings.content}</f:format.raw><br />',
+    heading: 'Zum Aktivieren des Videos bitte auf den Link klicken. Durch das Aktivieren von eingebetteten Videos werden Daten an den jeweiligen Anbieter übermittelt. Weitere Informationen können unserer Datenschutzerklärung entnommen werden.<br />'
+
+    }
+    );
+
+    function setConsentStatus(service, status) {
+    consentStatuses[service] = status;
+
+    let cookie = getConsentStatuses();
+    if (cookie != {}) {
+    deleteCookie(consentCookieName);
+    }
+    var d = new Date;
+    d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * 30);
+    document.cookie = consentCookieName + "=" + JSON.stringify(consentStatuses) + ";path=/;expires=" + d.toGMTString();
+
+    }
+
+    function deleteCookie(name) {
+    // Create an expired date.
+    var expiredDate = new Date();
+    expiredDate.setTime(expiredDate.getTime() - (1000 * 3600)); // Subtracting 1 hour from current time
+
+    // Setting the cookie with an expired date deletes it.
+    document.cookie = name + "=; expires=" + expiredDate.toGMTString() + "; path=/";
+    }
+
+    function getConsentStatuses() {
+    var v = document.cookie.match('(^|;) ?' + consentCookieName + '=([^;]*)(;|$)');
+    return v ? JSON.parse(v[2]) : {};
+    }
+
+    // Create div-element within the respective iframe to display the defined data-security message and get consent for loading the iframe content.
+
+    function wrap(el, wrapper, type, text, heading, btnColor, textColor, imagePath, imageStatus, bgColor, buttonTextColor, btnText, btnShape) {
+    el.parentNode.insertBefore(wrapper, el);
+    wrapper.className = 'privacy-msg privacy-' + type + '-msg';
+    wrapper.style.width = el.clientWidth + 'px';
+    wrapper.style.height = el.clientHeight + 'px';
+    wrapper.innerHTML = imageStatus == 1 ? "<div class='bgComtainer-image'><img class='bg-image' src='" + window.location.origin +"/"+ imagePath + "'/><div class='overlay'></div>" : "";
+    wrapper.innerHTML += '<h2 style="color:' + textColor + '">' + heading + '</h2>';
+    wrapper.innerHTML += '<p class="description" style="color:' + textColor + '">' + text + '</p>' + '<a href="#foo" class="link-action-gdpr ' + btnShape + '" style="background-color: ' + btnColor + ';color:' + buttonTextColor + '" onclick="_2ClickIframePrivacy.EnableContent(\'' + type + '\'); return false;">' + btnText + '</a>';
+    if (config.enableCookies) {
+    wrapper.innerHTML = wrapper.innerHTML + '<label class="checkbox-label"  style="color:' + textColor + ';display: none"><input type="checkbox" checked style="border-color: ' + btnColor + '" name="remind-\'' + type + '\'" /> ' + config.rememberChoiceLabel + '</label>';
+    }
+    if (config.privacyPolicyUrl) {
+    wrapper.innerHTML = wrapper.innerHTML + '<br /><a href="' + config.privacyPolicyUrl + '">' + config.privacyPolicyLabel + '</a>';
+    }
+    wrapper.innerHTML = '<div class="wraper" style="background-color: ' + bgColor + '"><p>' + wrapper.innerHTML + '</p></div>';
+    wrapper.appendChild(el);
+    }
+
+    this.EnableContent = function (type) {
+    var i;
+
+    // Cookies globally enabled by config?
+    var checkboxes = document.querySelectorAll('div.privacy-' + type + '-msg input');
+
+    if (config.enableCookies) {
+    for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked == true) {
+    let service = checkboxes[i].parentNode.parentNode.nextElementSibling.getAttribute('data-2click-service'); // get service name from iframe
+    ;
+    setConsentStatus(service + '_<f:format.raw>{rootPid}</f:format.raw>', '1');
+    }
+    }
+    }
+
+
+    var x = document.querySelectorAll('div.privacy-' + type + '-msg .wraper');
+    for (i = 0; i < x.length; i++) {
+    while (x[i].firstChild) {
+    x[i].removeChild(x[i].firstChild);
+    }
+    }
+
+    x = document.querySelectorAll('div.privacy-' + type + '-msg');
+    for (i = 0; i < x.length; i++) {
+    var parent = x[i].parentNode;
+
+    // Move all children out of the element
+    while (x[i].firstChild) parent.insertBefore(x[i].firstChild, x[i]);
+
+    // Remove the empty element
+    parent.removeChild(x[i]);
+    }
+
+    x = document.querySelectorAll('iframe[data-2click-service="' + type + '"]');
+
+    for (i = 0; i < x.length; i++) {
+
+
+    let serviceType = x[i].getAttribute("data-2click-service");
+
+    x[i].style.display = 'block';
+    if (serviceType === 'gdpr_extensions_com_gmap') {
+    if (i == 0) {
+    let parent = x[i];
+    let mapDiv = document.createElement('div');
+    mapDiv.id = "map" + i;
+    mapDiv.className = "map";
+    parent.parentNode.insertBefore(mapDiv, parent.nextSibling)
+
+    loadMapScript(x[i].nextElementSibling);
+    } else {
+    initMap((x[i].nextElementSibling));
+    }
+    }
+    if (serviceType === 'gdpr_extensions_com_bmap') {
+    gdpr_extensions_com_bmap_gdpr(x[i],'add');
+    }
+
+    if (serviceType === 'gdpr_extensions_com_sfc') {
+    gdpr_extensions_com_sfc_gdpr(x[i],'add');
+    }
+
+
+    x[i].src = x[i].getAttribute("data-src");
+    }
+
+    // If available, execute the callback that is defined for the currently active type
+    for (i = 0; i < this.types.length; i++) {
+    if (this.types[i].type == type && this.types[i].callback) {
+    window[this.types[i].callback]();
+    }
+    }
+
+    gdprInner?.classList.remove('gdprInner');
+
+    if (toggleButtons.length !== 0) {
+    for (let i = 0; i < toggleButtons.length; i++) {
+    let extTitle = toggleButtons[i].getAttribute('data-ext-title');
+    let service = extTitle + '<f:format.raw>_{rootPid}</f:format.raw>'; // assuming that extension title always has the service name at the third position
+    ;
+    // initially set the checkbox according to the cookie value
+
+    toggleButtons[i].checked = Boolean(Number(consentStatuses[service])); // convert string to boolean
+
+    }
+    if (areAllChecked()) {
+    // acceptBtn.disabled = true;
+    // acceptBtn.classList.add('disabled');
+    }
+    }
+
+
+    }
+
+    function DisableContent(type, e) {
+    var i;
+
+    // Accessing all relevant checkboxes
+    var checkboxes = document.querySelectorAll('div.privacy-' + type + '-msg input');
+
+    for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked == false) { // Checking if the checkbox is not checked
+    let service = checkboxes[i].parentNode.parentNode.nextElementSibling.getAttribute('data-2click-service');
+    setConsentStatus(service + '<f:format.raw>_{rootPid}</f:format.raw>', '0'); // Set consent status to '0' indicating disapproval
+    }
+    }
+
+    var x = document.querySelectorAll('iframe[data-2click-service="' + type + '"],div[data-2click-service="' + type + '"]');
+
+    for (i = 0; i < x.length; i++) {
+    let dummy = x[i].innerHTML;
+    x[i].style.display = 'none';
+
+    x[i].src = ''; // Disabling the iframe by setting src as empty
+    if (type == 'gdpr_extensions_com_gmap') {
+    let elementToRemove = x[i].nextElementSibling;
+    if (elementToRemove) {
+    elementToRemove.parentNode.removeChild(elementToRemove);
+    }
+
+    }
+    if (type == 'gdpr_extensions_com_bmap') {
+    gdpr_extensions_com_bmap_gdpr(x[i],'remove');
+
+    }
+
+    if (type == 'gdpr_extensions_com_sfc') {
+
+    gdpr_extensions_com_sfc_gdpr(x[i],'remove');
+
+    }
+    }
+
+    // If available, execute the callback that is defined for the currently active type
+    for (i = 0; i < e.length; i++) {
+    if (e[i].type == type && e[i].callback) {
+    window[e[i].callback]();
+    }
+    }
+    gdprInner?.classList.add('gdprInner');
+    // acceptBtn.disabled = false;
+    // acceptBtn.classList.remove('disabled');
+    }
+
+    const loadMapScript = function (parent) {
+    ;
+    const mapScript = document.createElement("script");
+    const body = document.querySelector("body");
+    const mapsApiKey = document.getElementById("mapApiKey").innerText;
+
+    mapScript.setAttribute(
+    "src",
+    `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&libraries=geometry`
+    );
+
+    console.log("exec: ", `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&libraries=geometry`);
+    body.insertAdjacentElement("beforeend", mapScript);
+
+    mapScript.onload = () => {
+    initMap(parent);
+    };
+
+    mapScript.onerror = function (error) {
+    console.error("Error loading Google Maps API:", error);
+    };
+    };
+
+    function initMap(parent) {
+
+    const latLongData = JSON.parse(document.getElementById("LatLongData").innerText);
+    const markerImagePath = document.getElementById("markerImagePath").innerText;
+    var firstKey = Object.keys(latLongData)[0];
+    var firstLocation = latLongData[Object.keys(latLongData)[0]];
+
+
+    const zoomButton = 1;
+    const satelliteView = 'SATELLITE';
+
+    const mapTypeIdMapping = {
+    HYBRID: google.maps.MapTypeId.HYBRID,
+    ROADMAP: google.maps.MapTypeId.ROADMAP,
+    SATELLITE: google.maps.MapTypeId.SATELLITE,
+    TERRAIN: google.maps.MapTypeId.TERRAIN,
+    };
+    const map = new google.maps.Map(parent, {
+    zoom: 13,
+    center: {lat: firstLocation.lat / 1000000, lng: firstLocation.long / 1000000},
+    });
+
+    map.setOptions({
+    zoomControl: zoomButton ? true : false,
+    });
+    // const locationMarkers = document.querySelectorAll(".location-marker");
+
+    latLongData.forEach((markerElement) => {
+
+    const latitude = parseFloat(markerElement.lat);
+    const longitude = parseFloat(markerElement.long);
+    const bodyText = markerElement.address;
+
+    const title = markerElement.title;
+    let markerIcon;
+    if (markerImagePath) {
+
+    markerIcon = {
+    url: `${window.location.origin}${markerImagePath}`, // url
+    scaledSize: new google.maps.Size(70, 70), // scaled size
+    origin: new google.maps.Point(0, 0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+    };
+    }
+
+    if (!isNaN(latitude) && !isNaN(longitude)) {
+    const marker = new google.maps.Marker({
+    position: {lat: latitude / 1000000, lng: longitude / 1000000},
+    map: map,
+    title: title,
+    icon: markerIcon,
+    });
+
+    let contentString = `
+    <div class="location-marker__info-window" style="padding: 6px 2px; max-width: 150px">
+        <div class="location-marker__title" style="font-weight: bold; margin-bottom: 5px">${title}</div>
+        <div class="location-marker__body-text" style="line-height: 1.4">${bodyText}</div>
+    </div>
+    `;
+
+    const infoWindow = new google.maps.InfoWindow({
+    content: contentString,
+    });
+
+    marker.addListener("click", () => {
+    infoWindow.open(map, marker);
+    });
+
+
+    }
+    });
+
+
+    }
+
+
+    this.init = function (Userconfig, solSetting, key) {
+    // Read UserConfiguration:
+    if (typeof Userconfig.enableCookies !== 'undefined') {
+    config.enableCookies = Userconfig.enableCookies;
+    }
+    if (typeof Userconfig.useSessionCookie !== 'undefined') {
+    config.useSessionCookie = Userconfig.useSessionCookie;
+    }
+    if (typeof Userconfig.cookieNamespace !== 'undefined') {
+    config.cookieNamespace = Userconfig.cookieNamespace;
+    }
+    if (typeof Userconfig.privacyPolicyUrl !== 'undefined') {
+    config.privacyPolicyUrl = Userconfig.privacyPolicyUrl;
+    }
+    if (typeof Userconfig.showContentLabel !== 'undefined') {
+    config.showContentLabel = Userconfig.showContentLabel;
+    }
+    if (typeof Userconfig.rememberChoiceLabel !== 'undefined') {
+    config.rememberChoiceLabel = Userconfig.rememberChoiceLabel;
+    }
+    if (typeof Userconfig.privacyPolicyLabel !== 'undefined') {
+    config.privacyPolicyLabel = Userconfig.privacyPolicyLabel;
+    }
+
+    if (Array.isArray(Userconfig.CustomTypes)) {
+    this.types = Userconfig.CustomTypes;
+    }
+    for (let i = 0; i < this.types.length; i++) {
+    var selector = document.querySelectorAll('iframe[data-2click-type="' + this.types[i].type + '"],div[data-2click-type="' + this.types[i].type + '"]');
+
+    for (let x = 0; x < selector.length; x++) {
+
+    let service = selector[x].getAttribute('data-2click-service'); // get service name from iframe
+    let service_root = service + '_<f:format.raw>{rootPid}</f:format.raw>';
+    let check = solSetting[service];
+
+
+    if (consentStatuses[service_root] !== '1') {
+
+    wrap(selector[x], document.createElement('div'),
+    service,
+    solSetting[service].content,
+    solSetting[service].heading,
+    solSetting[service].button_color,
+    solSetting[service].text_color,
+    solSetting[service].background_image,
+    solSetting[service].enable_background_image,
+    solSetting[service].background_image_color,
+    solSetting[service].button_text_color,
+    solSetting[service].button_text,
+    solSetting[service].button_shape,
+    );
+    } else {
+
+
+    selector[x].src = selector[x].getAttribute("data-src");
+    gdprInner?.classList.remove('gdprInner');
+    selector[x].style.display = 'block';
+
+    if (service === 'gdpr_extensions_com_gmap') {
+    let parent = selector[x];
+    let mapDiv = document.createElement('div');
+    mapDiv.id = "map" + i;
+    mapDiv.className = "map";
+    parent.parentNode.insertBefore(mapDiv, parent.nextSibling)
+    loadMapScript(selector[x].nextElementSibling);
+    }
+    if (service === 'gdpr_extensions_com_bmap') {
+    gdpr_extensions_com_bmap_gdpr(selector[x],'add');
+    }
+    if (service === 'gdpr_extensions_com_sfc') {
+
+    gdpr_extensions_com_sfc_gdpr(selector[x],'add');
+    }
+    }
+
+
+    }
+
+    }
+
+
+
+    // Get all toggle buttons
+    // For each toggle button
+    // let GtmScriptAdded = false;
+    let GtmScriptAdded = {
+    GtmScriptAdded : false
+    };
+    let MatomoScriptAdded = {
+    MatomoScriptAdded : false
+    };
+
+    if (toggleButtons.length !== 0) {
+    for (let i = 0; i < toggleButtons.length; i++) {
+
+    let extTitle = toggleButtons[i].getAttribute('data-ext-title');
+    let service = extTitle + '<f:format.raw>_{rootPid}</f:format.raw>';
+
+    // initially set the checkbox according to the cookie value
+
+    toggleButtons[i].checked = Boolean(Number(consentStatuses[service])); // convert string to boolean
+
+
+    // Adding GTM custom code here
+
+    gdpr_extensions_com_gt_gdpr({service: service, track:'tag',togglebtn: toggleButtons[i].checked, fnType: 'add', state: GtmScriptAdded});
+
+    // Adding matomo custom code here
+
+    gdpr_extensions_com_mt_gdpr({service: service, track:'matomo',togglebtn: toggleButtons[i].checked, fnType: 'add', state: MatomoScriptAdded});
+
+    // Adding meta custom code here
+
+    gdpr_extensions_com_mp_gdpr({service: service, track:'meta',togglebtn: toggleButtons[i].checked, fnType: 'add', state: MatomoScriptAdded});
+
+    let wrapperFunctionData = this.types;
+
+    // add event listener on checkbox change
+
+    toggleButtons[i].addEventListener('change', function (e) {
+
+    setConsentStatus(service, this.checked ? '1' : '0'); // convert boolean to number
+    this.checked;
+
+    if (this.checked == false) {
+
+
+    gdpr_extensions_com_gt_gdpr({service: service, track:'tag', fnType: 'remove' });
+
+
+    // Removing matomo custom code here
+
+    gdpr_extensions_com_mt_gdpr({service: service, track:'matomo', fnType: 'remove' });
+
+    // Removing meta custom code here
+
+    gdpr_extensions_com_mp_gdpr({service: service, track:'meta', fnType: 'remove' });
+
+
+    DisableContent(extTitle, wrapperFunctionData)
+    wrapfunction(wrapperFunctionData, arr, extTitle);
+
+    } else {
+
+
+    // Adding GTM custom code here
+
+
+    gdpr_extensions_com_gt_gdpr({service: service, track:'tag', fnType: 'add' });
+
+    // Adding matomo custom code here
+
+    gdpr_extensions_com_mt_gdpr({service: service, track:'matomo', fnType: 'add' });
+
+    // Adding meta custom code here
+
+    gdpr_extensions_com_mp_gdpr({service: service, track:'meta', fnType: 'add' });
+
+
+    _2ClickIframePrivacy.EnableContent(extTitle)
+    }
+    });
+    }
+    }
+
+
+    function wrapfunction(e, settings, key) {
+
+    for (let i = 0; i < e.length; i++) {
+
+    var selector = document.querySelectorAll('iframe[data-2click-type="' + e[i].type + '"],div[data-2click-type="' + e[i].type + '"]');
+    for (let x = 0; x < selector.length; x++) {
+    let service = selector[x].getAttribute('data-2click-service'); // get service name from iframe
+    if (service == key) {
+    if (consentStatuses[service] !== '1') {
+    wrap(selector[x],
+    document.createElement('div'),
+    service, settings[service].content,
+    settings[service].heading,
+    settings[service].button_color,
+    settings[service].button_text_color,
+    settings[service].background_image,
+    settings[service].enable_background_image,
+    settings[service].background_image_color,
+    settings[service].button_text_color,
+    settings[service].button_text,
+    settings[service].button_shape,
+    );
+    } else {
+    selector[x].src = selector[x].getAttribute("data-src");
+    }
+    }
+
+    }
+
+    }
+
+    }
+
+    if (toggleButtons.length !== 0) {
+    if (areAllChecked()) {
+    // acceptBtn.disabled = true;
+    // acceptBtn.classList.add('disabled');
+    }
+    }
+
+    };
+    }
+    }
+
+    // Call the function to add the GTM script
+
+    function areAllChecked() {
+    for (let i = 0; i < switchs.length; i++) {
+    if (!switchs[i].checked) {
+    return false;
+    }
+    }
+    return true;
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+    let gdpr_categoryHeaders = document.querySelectorAll('.category-header');
+    let gdpr_moreBtn = document.querySelectorAll('.category-container .more_details');
+    let gdpr_cookieDataContainer = document.querySelector('.cookie-data');
+    let gdpr_goBackBtn = document.querySelectorAll('.go-back');
+    let gdpr_detailTable = document.querySelectorAll('.more-detail-table');
+    let gdpr_modalContent = document.querySelector('.modal-content');
+    let gdpr_scroll = document.querySelector('.modal-content .scroll');
+    let gdpr_icon = document.getElementById('gdpr-cookie-consent__icon');
+    let gdpr_model = document.getElementById('gdpr-cookie-consent__model');
+
+    if (gdpr_model) {
+    gdpr_icon?.addEventListener('click', function () {
+    gdpr_model.style.display = 'block';
+    })
+
+    gdpr_categoryHeaders?.forEach(header => {
+    header?.addEventListener('click', function () {
+    let content = header.nextElementSibling;
+
+    if (content.classList.contains('show')) {
+
+    content.style.maxHeight = content.scrollHeight + 'px';
+    setTimeout(function () {
+    content.style.maxHeight = '0';
+    }, 10);
+
+    content.classList.remove('show');
+    content.classList.add('hide');
+    header.querySelector('.arrow').textContent = '+';
+    } else {
+    content.style.maxHeight = content.scrollHeight + 'px';
+
+    content.classList.remove('hide');
+    content.classList.add('show');
+    header.querySelector('.arrow').textContent = '-';
+    }
+    });
+    });
+
+
+    let closeModal = document.getElementById('closeModal');
+    closeModal?.addEventListener('click', function () {
+    document.getElementById('gdpr-cookie-consent__model').style.display = 'none';
+    });
+
+    // let modal = document.getElementById('gdpr-cookie-consent__model');
+    let cookiesRejected = localStorage.getItem('cookiesRejected');
+    console.log(cookiesRejected);
+    console.log(!cookiesRejected);
+    if (!cookiesRejected) {
+    console.log('inif');
+    gdpr_model.style.display = "block";
+    }
+
+    gdpr_moreBtn?.forEach((btn) => {
+    btn?.addEventListener('click', function () {
+    let btnIdentifier = this?.getAttribute('data-identifier');
+    const table = document.querySelector(`.more-detail-table[data-identifier="${btnIdentifier}"]`);
+    if (table) {
+    gdpr_cookieDataContainer.classList.add('d-none');
+    table.classList.remove('d-none');
+    gdpr_modalContent.classList.add('expanded');
+    gdpr_scroll.classList.add('expanded');
+    adjustModalWidth();
+    }
+    })
+    })
+
+    gdpr_goBackBtn.forEach((btn, index) => {
+    btn.addEventListener('click', function () {
+    gdpr_detailTable.forEach((item) => {
+    item.classList.add('d-none');
+    })
+    gdpr_cookieDataContainer.classList.remove('d-none');
+    if (gdpr_modalContent && gdpr_scroll) {
+    gdpr_modalContent.classList.remove('expanded');
+    gdpr_modalContent.style.width = '100%';
+
+    gdpr_scroll.classList.remove('expanded');
+    gdpr_scroll.style.maxWidth = '440px';
+    }
+    })
+    })
+    }
+
+
+    });
+    window.addEventListener('resize', adjustModalWidth);
+
+    function adjustModalWidth() {
+    // query for the elements that we want to dynamically change their widths
+    var gdpr_modalContent = document.querySelector('.modal-content.expanded');
+    var scrollElement = document.querySelector('.scroll.expanded');
+
+    var windowWidth = window.innerWidth;
+    var maxWidth = windowWidth - 20;
+
+    // Check if window width is less than 1400px, if so, set max-width to windowWidth - 40px
+    if (windowWidth < 1400) {
+    gdpr_modalContent.style.width = maxWidth + 'px';
+    scrollElement.style.maxWidth = maxWidth + 'px';
+    } else {
+    gdpr_modalContent.style.width = 'unset';
+    scrollElement.style.maxWidth = '1400px';
+    }
+    }
+
+    function setCookies(value) {
+    if (value === 'false') {
+    window.yett.unblock()
+    }
+    localStorage.setItem('cookiesRejected', value);
+    document.getElementById('gdpr-cookie-consent__model').style.display = 'none';
+    }
+    function gdpr_extensions_com_bmap_gdpr(iframe, type) {
+
+    if (type != 'add' ) {
+    const BingMap = document.getElementById('bingmap');
+
+    BingMap.remove();
+    let elementToRemove = iframe.nextElementSibling;
+    if (elementToRemove) {
+    elementToRemove.parentNode.removeChild(elementToRemove);
+    }
+    }else{
+    let parent = iframe;
+    let mapDiv = document.createElement('div');
+    mapDiv.id = "bingmap";
+    mapDiv.className = "bingmap";
+
+    parent.parentNode.insertBefore(mapDiv, parent.nextSibling)
+
+    const bingMapScript = document.createElement("script");
+    const bingBody = document.querySelector("body");
+
+    bingMapScript.setAttribute(
+    "src",
+    'https://www.bing.com/api/maps/mapcontrol?callback=GetMap'
+    );
+    bingBody.insertAdjacentElement("beforeend", bingMapScript);
+
+    bingMapScript.onload = () => {
+    GetMap(parent);
+    };
+
+    bingMapScript.onerror = function (error) {
+    console.error("Error loading Google Maps API:", error);
+    };
+    }
+    }
+
+    function gdpr_extensions_com_sfc_gdpr(iframe, type) {
+
+
+    if (type != 'add' ) {
+    let SfcDiv = iframe.nextElementSibling;
+    while (SfcDiv.firstChild) {
+    SfcDiv.removeChild(SfcDiv.firstChild);
+    }
+    SfcDiv.style.display = 'none';
+
+    }else{
+    let parent = iframe;
+    let SfcDiv = iframe.nextElementSibling;
+    let SfcScript = atob(SfcDiv.getAttribute('data-2click-curator'));
+    let scriptContent = SfcScript.match(/<script[^>]*>([\w|\W]*)<\/script>/)[1];
+
+
+
+    parent.style.display = 'none';
+    SfcDiv.style.display = 'block';
+
+    // Create a new script element
+    let scriptElement = document.createElement("script");
+
+    // Set the new script's content
+    scriptElement.innerHTML = scriptContent;
+
+    // Append the new script element as a child of
+    SfcDiv.appendChild(scriptElement);
+
+    //SfcDiv.insertAdjacentHTML('beforeend', SfcScript);
+
+    // Get HTML content by replacing script tags and their contents with an empty string
+    let htmlContent = SfcScript.replace(/<script[^>]*>([\w|\W]*)<\/script>/g, '');
+
+    // Create a new div element for the HTML content
+    let htmlElement = document.createElement("div");
+
+    // Set the new div's inner HTML to the HTML content
+    htmlElement.innerHTML = htmlContent;
+
+    // Append the new div element as a child of
+    SfcDiv.appendChild(htmlElement);
+
+
+
+
+    }
+    }
+
+
+    function GetMap() {
+    const bingMarkers = document.getElementById('LatLongData').innerHTML;
+    const bingmarkerImagePath = document.getElementById('bingmarkerImagePath').innerHTML;
+    const bingmapApiKey = document.getElementById('bingmapApiKey').innerHTML;
+    const bingMarkersData = JSON.parse(bingMarkers);
+    let map = new Microsoft.Maps.Map('#bingmap', {
+    credentials: bingmapApiKey,
+    supportedMapTypes: [ Microsoft.Maps.MapTypeId.grayscale],
+    zoom: 7
+    });
+
+    let locationPoints = [];
+    let promises = bingMarkersData.map(location => new Promise(resolve => {
+    let img = new Image();
+    img.onload = function() {
+    let canvas = document.createElement('canvas');
+    let markerWidth = 100;
+    let markerHeight = 50;
+    canvas.width = markerWidth;
+    canvas.height = markerHeight;
+
+    let ctx = canvas.getContext('2d');
+    ctx.drawImage(this, 0, 0, markerWidth, markerHeight);
+
+    let icon = canvas.toDataURL();
+
+    let pushpin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(location.lat / 1000000, location.long / 1000000),{
+    icon: icon,
+    anchor: new Microsoft.Maps.Point(0.5, 0.5)
+    });
+
+    let infobox = new Microsoft.Maps.Infobox(pushpin.getLocation(), { title: location.title, description: location.address, visible: true });
+    Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {
+    infobox.setOptions({ visible: true });
+    });
+
+    map.entities.push(pushpin);
+    map.entities.push(infobox);
+    locationPoints.push(new Microsoft.Maps.Location(location.lat / 1000000, location.long / 1000000));
+    resolve();
+    };
+
+    img.src = bingmarkerImagePath;
+    }));
+
+    Promise.all(promises).then(() => {
+    var totalLat = 0;
+    var totalLong = 0;
+
+    for (var i = 0; i < locationPoints.length; i++) {
+    totalLat += locationPoints[i].latitude;
+    totalLong += locationPoints[i].longitude;
+    }
+
+    var centerLocation = new Microsoft.Maps.Location(totalLat / locationPoints.length, totalLong / locationPoints.length);
+    map.setView({ center: centerLocation });
+    });
+
+    let bingMapDiv = document.getElementById('bingmap');
+    if (bingMapDiv != null){
+    bingMapDiv.style.cssText = 'position: relative; width: 100%; height: 600px;';
+    }
+    }
+
+    function gdpr_extensions_com_mt_gdpr({service, track,togglebtn, fnType,state} = {}) {
+
+    if (service === 'gdpr_extensions_com_mt_' + '<f:format.raw>{rootPid}</f:format.raw>') {
+
+    if(track == 'matomo' && fnType == 'add'){
+
+    if(typeof togglebtn === 'undefined'){
+
+    addMatomo(service);
+    }else{
+
+    var headScriptMatomoJs = document.querySelector('script[src*="matomo.js"]');
+
+    if (!headScriptMatomoJs && (service === 'gdpr_extensions_com_mt_' + '<f:format.raw>{rootPid}</f:format.raw>') && togglebtn && !state.MatomoScriptAdded) {
+    addMatomo(service);
+    state.MatomoScriptAdded = true;
+
+    }
+    }
+
+    }
+
+    if(track == 'matomo' && fnType == 'remove') {
+
+    removeMatomo();
+    }
+
+    }
+
+    function addMatomo(service) {
+    // Create the Meta Pixel script element for the head
+    let cookieWidgetAjax = '<f:format.raw><f:uri.action action="ajax" controller="GdprExtensionsComMp" pluginName="gdprmt" extensionName="GdprExtensionsComMp"/></f:format.raw>';
+    // Get Current URL
+    const currentUrl = window.location.href;
+    // Prepare your data
+    let data = {
+    url: currentUrl,
+    rootPid: '<f:format.raw>{rootPid}</f:format.raw>'
+    };
+
+    ;
+
+
+    // Send data using Fetch API
+    fetch(cookieWidgetAjax, {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+    console.log('Success:', result);
+    // Assuming the result is a plain text or HTML code for Meta Pixel
+    if (result.status !== 0) {
+    var matomoCode = result.matomo_code;
+
+    if (matomoCode !== '') {
+    let orignalContent = atob(matomoCode);
+    var matomoCodesdd = extractMatomoCode(orignalContent);
+    var matomoScript = document.createElement('script');
+    matomoScript.id = 'matomo-script';
+    matomoScript.innerHTML = matomoCodesdd;
+
+    // Append the Meta Pixel script to the head
+    document.head.appendChild(matomoScript);
+    // window.dispatchEvent(new Event('yett-unblock'))
+
+    }
+    }
+
+    })
+    .catch(error => console.error('Error:', error));
+
+    }
+
+    function removeMatomo() {
+    // Remove the Meta Pixel script from the head
+    var toRemoveheadScriptJs = document.querySelector('script[src*="matomo.js"]');
+    var matomoScript = document.getElementById('matomo-script');
+    if (matomoScript) {
+    matomoScript.parentNode.removeChild(matomoScript);
+    }
+    if (toRemoveheadScriptJs) {
+
+    toRemoveheadScriptJs.parentNode.removeChild(toRemoveheadScriptJs);
+    }
+    }
+
+    function extractMatomoCode(html) {
+    // Match the content of the script tag
+    var scriptRegex = /<script>([\s\S]+?)<\/script>/;
+
+    // Extract the content of the <script> tag
+    var match = html.match(scriptRegex);
+    if (match) {
+        return match[1];
+    } else {
+        return null;
+    }
+    }
+    }
+    function gdpr_extensions_com_mp_gdpr({service, track,togglebtn, fnType,state} = {}) {
+
+        if (service === 'gdpr_extensions_com_mp_' + '<f:format.raw>{rootPid}</f:format.raw>') {
+
+            if(track == 'meta' && fnType == 'add'){
+
+                if(typeof togglebtn === 'undefined'){
+
+                    addMeta(service);
+                }else{
+
+                    var headScriptMetaJs = document.querySelector('script[src*="fbevents.js"]');
+
+                    if (!headScriptMetaJs && (service === 'gdpr_extensions_com_mp_' + '<f:format.raw>{rootPid}</f:format.raw>') && togglebtn && !state.MetaScriptAdded) {
+                        addMeta(service);
+                        state.MetaScriptAdded = true;
+
+                    }
+                }
+
+            }
+
+            if(track == 'meta' && fnType == 'remove') {
+
+                removeMeta();
+            }
+
+        }
+
+        function addMeta(service) {
+            // Create the Meta Pixel script element for the head
+            let cookieWidgetAjax = '<f:format.raw><f:uri.action action="ajax" controller="GdprExtensionsComMp" pluginName="gdprmp" extensionName="GdprExtensionsComMp"/></f:format.raw>';
+            // Get Current URL
+            const currentUrl = window.location.href;
+            // Prepare your data
+            let data = {
+                url: currentUrl,
+                rootPid: '<f:format.raw>{rootPid}</f:format.raw>'
+            };
+
+            ;
+
+
+            // Send data using Fetch API
+            fetch(cookieWidgetAjax, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Success:', result);
+                    // Assuming the result is a plain text or HTML code for Meta Pixel
+                    if (result.status !== 0) {
+                        var metaCode = result.meta_code;
+
+                        if (metaCode !== '') {
+                            let originalContent = atob(metaCode);
+                            var metaCodesdd = extractMetaPixelCode(originalContent);
+
+                            // Dynamically create and append the script tag
+                            if (metaCodesdd.script) {
+                                var metaScript = document.createElement('script');
+                                metaScript.id = 'meta-script';
+                                metaScript.innerHTML = metaCodesdd.script;
+                                document.head.appendChild(metaScript);
+                            }
+
+                            // Dynamically create and append the noscript tag
+                            if (metaCodesdd.noscript) {
+                                var noscript = document.createElement('noscript');
+                                noscript.id = 'meta-noscript';
+                                noscript.innerHTML = metaCodesdd.noscript;
+                                document.head.appendChild(noscript);
+                            }
+                        }
+                    }
+
+                })
+                .catch(error => console.error('Error:', error));
+
+        }
+
+        function removeMeta() {
+            // Remove the Meta Pixel script (created dynamically) from the head
+            var metaScript = document.getElementById('meta-script');
+            var metaNoScript = document.getElementById('meta-noscript');
+
+            // Remove the <script> tag for "fbevents.js"
+            var fbeventsScript = document.querySelector('script[src*="fbevents.js"]');
+
+            // Remove the <script> tag for the Facebook signals config
+            var fbConfigScript = document.querySelector('script[src*="connect.facebook.net/signals/config"]');
+
+            // Remove dynamically created script and noscript tags
+            if (metaScript) {
+                metaScript.parentNode.removeChild(metaScript);
+            }
+            if (metaNoScript) {
+                metaNoScript.parentNode.removeChild(metaNoScript);
+            }
+
+            // Remove fbevents.js script
+            if (fbeventsScript) {
+                fbeventsScript.parentNode.removeChild(fbeventsScript);
+            }
+
+            // Remove Facebook config script
+            if (fbConfigScript) {
+                fbConfigScript.parentNode.removeChild(fbConfigScript);
+            }
+        }
+
+        function extractMetaPixelCode(html) {
+            // Match the content of the script and noscript tags separately
+            const scriptRegex = /<script>([\s\S]*?)<\/script>/;
+            const noscriptRegex = /<noscript>([\s\S]*?)<\/noscript>/;
+
+            // Extract the content of the <script> tag
+            const scriptMatch = html.match(scriptRegex);
+            const scriptContent = scriptMatch ? scriptMatch[1] : null;
+
+            // Extract the content of the <noscript> tag
+            const noscriptMatch = html.match(noscriptRegex);
+            const noscriptContent = noscriptMatch ? noscriptMatch[1] : null;
+
+            // Return the content in key-value form
+            return {
+                script: scriptContent,
+                noscript: noscriptContent
+            };
+        }
+
+    }
+    function gdpr_extensions_com_gt_gdpr({service, track,togglebtn, fnType,state} = {}) {
+
+        if (service === 'gdpr_extensions_com_gt_' + '<f:format.raw>{rootPid}</f:format.raw>') {
+
+            if(track == 'tag' && fnType == 'add'){
+
+                if(typeof togglebtn === 'undefined'){
+
+                    addGTM(service);
+                }else{
+
+                    var headScriptJs = document.querySelector('script[src*="gtm.js"]');
+
+                    if (!headScriptJs && (service === 'gdpr_extensions_com_gt_' + '<f:format.raw>{rootPid}</f:format.raw>') && togglebtn && !state.GtmScriptAdded) {
+                        addGTM(service);
+                        state.GtmScriptAdded = true;
+
+                    }
+                }
+
+            }
+
+            if(track == 'tag' && fnType == 'remove') {
+
+                removeGTM();
+            }
+
+        }
+
+        function addGTM() {
+
+            // Create the Meta Pixel script element for the head
+            let cookieWidgetAjax = '<f:format.raw><f:uri.action action="ajax" controller="GdprExtensionsComGt" pluginName="gdprgt" extensionName="GdprExtensionsComGt"/></f:format.raw>';
+            // Get Current URL
+            const currentUrl = window.location.href;
+            ;
+            // Prepare your data
+            let data = {
+                url: currentUrl,
+                rootPid: '<f:format.raw>{rootPid}</f:format.raw>'
+            };
+
+            // Send data using Fetch API
+            fetch(cookieWidgetAjax, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Success:', result);
+                    // Assuming the result is a plain text or HTML code for Meta Pixel
+                    if (result.status !== 0) {
+                        var gtmCode = result.gtm_code;
+
+                        if (gtmCode !== '') {
+                            var headScript = document.createElement('script');
+
+                            headScript.id = 'gtm-script';
+                            headScript.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','${gtmCode}');`;
+
+                            // Append the GTM script to the head
+                            document.head.appendChild(headScript);
+
+                            // Create the GTM noscript element for the body
+                            var noscript = document.createElement('noscript');
+                            var iframe = document.createElement('iframe');
+                            iframe.src = `https://www.googletagmanager.com/ns.html?id=${gtmCode}`;
+                            iframe.height = "0";
+                            iframe.width = "0";
+                            iframe.style.display = "none";
+                            iframe.style.visibility = "hidden";
+
+                            // Append the iframe to the noscript element
+                            noscript.appendChild(iframe);
+
+                            // Append the noscript element to the body
+                            document.body.insertBefore(noscript, document.body.firstChild);
+                        }
+                    }
+
+                })
+                .catch(error => console.error('Error:', error));
+
+        }
+
+        // Call the function to remove the GTM script
+        function removeGTM() {
+            // Remove the GTM script from the head
+            var headScriptJs = document.querySelector('script[src*="gtm.js"]');
+            var headScript = document.getElementById('gtm-script');
+            if (headScript) {
+
+                headScript.parentNode.removeChild(headScript);
+            }
+            if (headScriptJs) {
+
+                headScriptJs.parentNode.removeChild(headScriptJs);
+            }
+
+            // Remove the GTM noscript from the body
+            var noscript = document.querySelector('body noscript');
+            if (noscript) {
+                noscript.parentNode.removeChild(noscript);
+            }
+        }
+
+    }
+
+
+
+
+
+    </f:asset.script>
+
+
+
+    </body>
+
+
+</html>

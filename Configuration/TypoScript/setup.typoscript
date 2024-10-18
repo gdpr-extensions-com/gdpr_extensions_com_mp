@@ -1,0 +1,57 @@
+
+plugin.tx_gdprextensionscommp_gdprcookiewidget {
+    view {
+        templateRootPaths.0 = EXT:gdpr_extensions_com_mp/Resources/Private/Templates/
+
+    }
+    persistence {
+
+    }
+    features {
+
+    }
+    mvc {
+        #callDefaultActionIfActionCantBeResolved = 1
+    }
+}
+
+#page = PAGE
+#page.999 < tt_content.list.20.gdprextensionscommp_gdprcookiewidget
+
+page = PAGE
+page.99999 < tt_content.gdprextensionscommp_gdprmp.20
+
+
+config.tx_extbase {
+    persistence {
+        classes {
+            GdprExtensionsCom\GdprExtensionsComMp\Domain\Model\GdprManager {
+                mapping {
+                    tableName = tx_gdprextensionscomyoutube_domain_model_gdprmanager
+                }
+            }
+
+            GdprExtensionsCom\GdprExtensionsComMp\Domain\Model\MapLocation {
+                mapping {
+                    tableName = tx_gdprextensionscomgooglemap_domain_model_maplocation
+                }
+            }
+        }
+    }
+}
+
+
+# Module configuration
+module.tx_gdprextensionscommp {
+    persistence {
+        storagePid = {$module.tx_gdprextensionscommp_gdprmanager.persistence.storagePid}
+    }
+    view {
+        templateRootPaths.0 = EXT:gdpr_extensions_com_mp/Resources/Private/Backend/Templates/
+        templateRootPaths.1 = {$module.tx_gdprextensionscommp_gdprmanager.view.templateRootPath}
+        partialRootPaths.0 = EXT:gdpr_extensions_com_mp/Resources/Private/Backend/Partials/
+        partialRootPaths.1 = {$module.tx_gdprextensionscommp_gdprmanager.view.partialRootPath}
+        layoutRootPaths.0 = EXT:gdpr_extensions_com_mp/Resources/Private/Backend/Layouts/
+        layoutRootPaths.1 = {$module.tx_gdprextensionscomyoutube_gdprmanager.view.layoutRootPath}
+    }
+}

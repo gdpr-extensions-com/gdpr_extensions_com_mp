@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:gdpr_extensions_com_mp/Resources/Private/Language/locallang.xlf" date="2023-12-15T08:19:36Z" product-name="gdpr_extensions_com_mp" target-language="de">
+		<header/>
+		<body>
+			<trans-unit id="content.tab" resname="content.tab">
+				<source>Content</source>
+				<target>Inhalt</target>
+			</trans-unit>
+			<trans-unit id="content.style.tab" resname="content.style.tab">
+				<source>Content Styling</source>
+				<target>Inhaltsgestaltung</target>
+			</trans-unit>
+			<trans-unit id="choose.file" resname="choose.file">
+				<source>Choose file</source>
+				<target>Datei auswählen</target>
+			</trans-unit>
+			<trans-unit id="shape.default" resname="shape.default">
+				<source>Default</source>
+				<target>Standard</target>
+			</trans-unit>
+			<trans-unit id="shape.round" resname="shape.round">
+				<source>Round</source>
+				<target>Rund</target>
+			</trans-unit>
+			<trans-unit id="shape.square" resname="shape.square">
+				<source>Square</source>
+				<target>Quadrat</target>
+			</trans-unit>
+			<trans-unit id="gdpr.heading" resname="gdpr.heading">
+				<source>GDPR Manager</source>
+				<target>DSGVO Manager</target>
+			</trans-unit>
+			<trans-unit id="gdpr.twoclick.desc" resname="gdpr.twoclick.desc">
+				<source>Manage Your GDPR 2 Click Solution</source>
+				<target>Verwalten Sie Ihre DSGVO 2-Klick-Lösung</target>
+			</trans-unit>
+			<trans-unit id="select.left" resname="select.left">
+				<source>Left</source>
+				<target>Links</target>
+			</trans-unit>
+			<trans-unit id="select.right" resname="select.right">
+				<source>Right</source>
+				<target>Rechts</target>
+			</trans-unit>
+			<trans-unit id="save.btn" resname="save.btn">
+				<source>Save</source>
+				<target>Speichern</target>
+			</trans-unit>
+			<trans-unit id="create.btn" resname="create.btn">
+				<source>Create New</source>
+				<target>Neu erstellen</target>
+			</trans-unit>
+			<trans-unit id="select.text" resname="select.text">
+				<source>Please Select</source>
+				<target>Bitte wählen</target>
+			</trans-unit>
+			<trans-unit id="changes.success" resname="changes.success">
+				<source>Changes saved successfully</source>
+				<target>Änderungen erfolgreich gespeichert</target>
+			</trans-unit>
+			<trans-unit id="new.gdpr" resname="new.gdpr">
+				<source>New GdprManager</source>
+				<target>Neuer GdprManager</target>
+			</trans-unit>
+			<trans-unit id="single.view.heading" resname="single.view.heading">
+				<source>Single View for GdprManager</source>
+				<target>Einzelansicht für GdprManager</target>
+			</trans-unit>
+			<trans-unit id="back.list.btn" resname="back.list.btn">
+				<source>Back to list</source>
+				<target>Zurück zur Liste</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_api" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_api">
+				<source>Map Api Key</source>
+				<target>Karten-API-Schlüssel</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_api.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_api.description">
+				<source>Map Api key</source>
+				<target>Karten-API-Schlüssel</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_title" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_title">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_description">
+				<source>Description</source>
+				<target>Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_latitude" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_latitude">
+				<source>Latitude</source>
+				<target>Breitengrad</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_longitude" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_longitude">
+				<source>Longitude</source>
+				<target>Längengrad</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_addlocation" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_addlocation">
+				<source>Add Location</source>
+				<target>Standort hinzufügen</target>
+			</trans-unit>
+			<trans-unit id="tx_GdprTwoXMatomo_domain_model_gdprgoogle_reviewlist" resname="tx_GdprTwoXMatomo_domain_model_gdprgoogle_reviewlist">
+				<source>Gdpr GoogleReviewlist</source>
+				<target>DSGVO GoogleReviewlist</target>
+			</trans-unit>
+			<trans-unit id="tx_GdprTwoXMatomo_domain_model_gdprgoogle_reviewlist.description" resname="tx_GdprTwoXMatomo_domain_model_gdprgoogle_reviewlist.description">
+				<source>Gdpr GoogleReviewlist</source>
+				<target>DSGVO GoogleReviewlist</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager">
+				<source>Gdpr Manager</source>
+				<target>DSGVO Manager</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.description">
+				<source>Gdpr Manager</source>
+				<target>DSGVO Manager</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading">
+				<source>Heading</source>
+				<target>Überschrift</target>
+			</trans-unit>
+			 <trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.meta_code" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.meta_code">
+				 <source>GTM Code</source>
+				<target>GTM-Code</target>
+			 </trans-unit>
+			 <trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.meta_code" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.meta_code">
+				 <source>Meta Pixel Code</source>
+				<target>Meta Pixel-Code</target>
+			 </trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading.description">
+				<source>Heading</source>
+				<target>Überschrift</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.content" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.content">
+				<source>Content</source>
+				<target>Inhalt</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.content.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.content.description">
+				<source>Content</source>
+				<target>Inhalt</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text">
+				<source>Button Text</source>
+				<target>Schaltflächentext</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text.description">
+				<source>Button Text</source>
+				<target>Schaltflächentext</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.enable_background_image" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.enable_background_image">
+				<source>Enable Background Image</source>
+				<target>Hintergrundbild aktivieren</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.enable_background_image.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.enable_background_image.description">
+				<source>Enable Background Image</source>
+				<target>Hintergrundbild aktivieren</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image">
+				<source>Background Image</source>
+				<target>Hintergrundbild</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_image" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_image">
+				<source>Cookie Widget Image</source>
+				<target>Cookie-Widget-Bild</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image.description">
+				<source>Background Image</source>
+				<target>Hintergrundbild</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color">
+				<source>Background Color</source>
+				<target>Farbe des Hintergrundbilds</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color.description">
+				<source>Background Color</source>
+				<target>Farbe des Hintergrundbilds</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color">
+				<source>Button Color</source>
+				<target>Schaltflächenfarbe</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color.description">
+				<source>Button Color</source>
+				<target>Schaltflächenfarbe</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.text_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.text_color">
+				<source>Text Color</source>
+				<target>Textfarbe</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text_color">
+				<source>Button Text Color</source>
+				<target>Schaltflächentextfarbe</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.text_color.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.text_color.description">
+				<source>Text Color</source>
+				<target>Textfarbe</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text_color.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text_color.description">
+				<source>Button Text Color</source>
+				<target>Schaltflächentextfarbe</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_shape" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_shape">
+				<source>Button Shape</source>
+				<target>Schaltflächenform</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.extension_title" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.extension_title">
+				<source>Extension Title</source>
+				<target>Erweiterungstitel</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_shape.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_shape.description">
+				<source>Button Shape</source>
+				<target>Schaltflächenform</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_position" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_position">
+				<source>Cookie Widget Position</source>
+				<target>Position des Cookie-Widgets</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_position.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_position.description">
+				<source>Cookie Widget Position</source>
+				<target>Position des Cookie-Widgets</target>
+			</trans-unit>
+			<trans-unit id="title.txt" resname="title.txt">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="gdpr.twoclick.consent" resname="gdpr.twoclick.consent">
+				<source>GDPR 2-CLICK COOKIE CONSENT</source>
+				<target>DSGVO 2-KLICK COOKIE-ZUSTIMMUNG</target>
+			</trans-unit>
+			<trans-unit id="gdpr.twoclick.consent.desc" resname="gdpr.twoclick.consent.desc">
+				<source>Cookies provided by host are managed through the Meta Pixel 2xClick solution developed by
+					gdpr-extensions.com </source>
+				<target>Die vom Host zur Verfügung gestellten Cookies werden über die von Meta Pixel entwickelte
+					2xClick-Lösung verwaltet gdpr-extensions.com</target>
+			</trans-unit>
+			<trans-unit id="gdpr.accept.all" resname="gdpr.accept.all">
+				<source>Accept All</source>
+				<target>Alle akzeptieren</target>
+			</trans-unit>
+			<trans-unit id="edit.gdpr" resname="edit.gdpr">
+				<source>Edit GdprManager</source>
+				<target>GdprManager bearbeiten</target>
+			</trans-unit>
+			<trans-unit id="list.gdpr.manager" resname="list.gdpr.manager">
+				<source>list for GdprManager</source>
+				<target>Listung für GdprManager</target>
+			</trans-unit>
+			<trans-unit id="edit.btn" resname="edit.btn">
+				<source>Edit</source>
+				<target>Bearbeiten</target>
+			</trans-unit>
+			<trans-unit id="delete.btn" resname="delete.btn">
+				<source>Delete</source>
+				<target>Löschen</target>
+			</trans-unit>
+			<trans-unit id="map.location" resname="map.location">
+				<source>Map Location</source>
+				<target>Kartenstandort</target>
+			</trans-unit>
+			<trans-unit id="reviews.tab" resname="reviews.tab">
+				<source>Reviews Tab</source>
+				<target>Bewertungen Tab</target>
+			</trans-unit>
+			<trans-unit id="meta.tab" resname="meta.tab">
+				<source>Google Tag Manager</source>
+				<target>Google Tag Manager</target>
+			</trans-unit>
+			<trans-unit id="meta.tab" resname="meta.tab">
+				<source>Meta Pixel</source>
+				<target>Meta Pixel</target>
+			</trans-unit>
+			<trans-unit id="root.pid" resname="root.pid">
+				<source>Root Page Id</source>
+				<target>Root-Seiten-ID</target>
+			</trans-unit>
+			<trans-unit id="base.url" resname="base.url">
+				<source>Base URL</source>
+				<target>Basis-URL</target>
+			</trans-unit>
+			<trans-unit id="actions.head" resname="actions.head">
+				<source>Actions</source>
+				<target>Aktionen</target>
+			</trans-unit>
+			<trans-unit id="add.edit.btn" resname="add.edit.btn">
+				<source>Add/Edit</source>
+				<target>Hinzufügen/Bearbeiten</target>
+			</trans-unit>
+			<trans-unit id="add.loc" resname="add.loc">
+				<source>Add Location</source>
+				<target>Standort hinzufügen</target>
+			</trans-unit>
+			<trans-unit id="add.your.loc" resname="add.your.loc">
+				<source>Add Your Location</source>
+				<target>Fügen Sie Ihren Standort hinzu</target>
+			</trans-unit>
+			<trans-unit id="dash.api.key" resname="dash.api.key">
+				<source>Dashboard API Key</source>
+				<target>Dashboard-API-Schlüssel</target>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_api" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_api">
+				<source>Map Api Key</source>
+				<target>Karten-API-Schlüssel</target>
+			</trans-unit>
+			<trans-unit id="loadMore" resname="loadMore">
+				<source>Load More</source>
+				<target>mehr anzeigen</target>
+			</trans-unit>
+			<trans-unit id="Sorting" resname="Sorting">
+				<source>Sorting:</source>
+				<target>Sortierung</target>
+			</trans-unit>
+			<trans-unit id="Latest" resname="Latest">
+				<source>Latest</source>
+				<target>KNeuestes</target>
+			</trans-unit>
+			<trans-unit id="Descending" resname="Descending">
+				<source>Descending</source>
+				<target>Absteigend</target>
+			</trans-unit>
+			<trans-unit id="Ascending" resname="Ascending">
+				<source>Ascending</source>
+				<target>Aufsteigend</target>
+			</trans-unit>
+			<trans-unit id="gdpr.confirm" resname="gdpr.confirm">
+				<source>Confirm</source>
+				<target>Bestätigen Sie</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,138 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+This template displays a EDIT form for the current domain object.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+Resources:
+Private:
+Backend:
+Templates:
+GdprManager:
+Edit.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="Buttons">
+
+</f:section>
+
+
+<f:section name="Content">
+    <style>
+        .btn-bg {
+            color: #fff;
+            background: #ee7202;
+            border-radius: 6px;
+            padding: 7px 14px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-bg:disabled{
+            opacity:0.5;
+        }
+        .row-data-inner,  .row-data-inner{
+             border: 1px solid #e7e6e6;
+        }
+        table{
+             border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+        }
+        tr{
+             border-bottom: 1px solid #e7e6e6;
+        }
+        .row-data{
+            background: #e7e6e6;
+            text-align: left;
+        }
+        .row-data th{
+            color: #343434;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24px;
+            min-width: 200px;
+            padding: 16px;
+        }
+        .row-data-inner{
+            border: 1px solid #e7e6e6;
+        }
+        tr td{
+            color: #343434;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            padding: 16px;
+       }
+       #review-edit-btn{
+            color: #fff;
+            background: #ee7202;
+            border-radius: 6px;
+            padding: 7px 14px;
+            border: none;
+            cursor: pointer;
+        }
+
+    </style>
+    <!-- comment -->
+<f:comment>
+    <div class="d-none">
+        <span id="uploadImageUrl">{uploadImageUrl}</span>
+    </div>
+</f:comment>
+    <h1><f:translate key="meta.twoclick.solution" extensionName="GdprExtensionsComMp" /></h1>
+<p>Welcome to the your Meta Pixel 2-Click Solution Customization page</p>
+
+    <f:flashMessages />
+
+    <f:render partial="FormErrors" />
+<!-- comment -->
+<f:comment>
+    <f:form action="update" name="gdprManager" object="{gdprManager}">
+        <f:render partial="GdprManager/FormFields" arguments="{gdprManager: gdprManager, googlemaps: googlemaps, google_review: google_review, sites: sites, matomo: matomo, gtm: gtm, meta: meta}" />
+        <f:form.submit value="{f:translate(key:'save.btn', extensionName: 'GdprExtensionsComMp')}" class="btn btn-default btn-bg" id="savebtngdpr"/>
+    </f:form>
+</f:comment>
+
+<table>
+    <thead>
+        <tr class="row-data">
+            <th style="border-radius: 8px 0 0 0;">
+                <f:translate key="root.pid" extensionName="GdprExtensionsComMp" />
+            </th>
+            <th>
+                <f:translate key="base.url" extensionName="GdprExtensionsComMp" />
+            </th>
+            <th style="border-radius: 0 8px 0 0;">
+                <f:translate key="actions.head" extensionName="GdprExtensionsComMp" />
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <f:for each="{sites}" as="config" key="siteKey">
+            <tr class="row-data-inner">
+                <td>{config.title} (ID: {config.rootPageId})</td>
+                <td>{config.base}</td>
+                <td>
+                    <!-- comment -->
+                     <f:comment>
+                    <button id="review-edit-btn" type="button" onclick="editLocations('{config.rootPageId}')">
+                        <f:translate key="add.edit.btn" extensionName="GdprExtensionsComMp" />
+                    </button>
+                    </f:comment>
+                    <f:link.action class="btn btn-default btn-bg" action="editAdd" arguments="{id: config.rootPageId, url: config.base,gdprManager: gdprManager, googlemaps: googlemaps, google_review: google_review, matomo: matomo, gtm: gtm, meta: meta}">
+                        <f:translate key="add.edit.btn" extensionName="GdprExtensionsComMp" />
+                    </f:link.action>
+                </td>
+            </tr>
+        </f:for>
+    </tbody>
+</table>
+</f:section>
+</html>

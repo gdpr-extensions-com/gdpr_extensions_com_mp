@@ -1,0 +1,95 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<style>
+    .review-bg {
+    background-color: {data.gdpr_background_color} !important;
+    }
+
+    .review {
+    background-color: {data.gdpr_background_color} !important;
+
+    border-color: {data.gdpr_color_of_border} !important;
+    }
+    .review__text span {
+    color: {data.gdpr_color_of_text} !important;
+    }
+
+    .review-grid-2-col--wrapper, .review-grid-2-col, .review__text--reply  {
+    border-color: {data.gdpr_color_of_border} !important;
+    }
+</style>
+<f:asset.css identifier="swipercss" href="EXT:gdpr_extensions_com_mp/Resources/Public/Css/swiper-bundle.min.css" />
+<f:asset.css identifier="swipercustomcss" href="EXT:gdpr_extensions_com_mp/Resources/Public/Css/slider.css" />
+<f:asset.css identifier="reviewcss" href="EXT:gdpr_extensions_com_mp/Resources/Public/Css/review.css" />
+<f:asset.script identifier="swiperjs" src="EXT:gdpr_extensions_com_mp/Resources/Public/js/swiper-bundle.min.js" />
+<f:asset.script identifier="swiperconfigjs" src="EXT:gdpr_extensions_com_mp/Resources/Public/js/swiper.js" />
+
+<section class="review-ext">
+  <!--TYPO3SEARCH_end-->
+  <div class="review-bg">
+    <div class="review-slider-wrapper">
+      <div class="container">
+        <div class="review-page">
+          <div class="swiper space-before-{data.space_before_class} space-after-{data.space_after_class}">
+            <div class="review-slider swiper-wrapper">
+              <f:for each="{reviews}" as="review" iteration="i">
+                <f:render section="review" arguments="{_all}" />
+              </f:for>
+            </div>
+            <div class="slider__btn swiper-button-prev" style="color: {data.gdpr_color_of_text};">
+            </div>
+            <div class="swiper-button-next" style="color: {data.gdpr_color_of_text};">
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--TYPO3SEARCH_begin-->
+</section>
+
+<f:section name="review">
+  <div class="review swiper-slide" itemscope itemprop="review" itemtype="https://schema.org/Review">
+    <meta itemprop="url" content="{f:uri.page(pageUid: pageUid, absolute:1)}">
+    <f:if condition="{data.gdpr_same_as_url}">
+      <meta itemprop="sameAs" content="{f:uri.typolink(parameter: '{data.gdpr_same_as_url}', absolute:1)}">
+    </f:if>
+    <span style="display: none;" itemscope itemprop="itemReviewed" itemtype="https://schema.org/Organization"><span
+        itemprop="name">{pageTitle}</span></span>
+    <div class="review__user">
+      <f:if condition="{review.reviewer_profile_photo_url}">
+        <div class="review__user-img">
+          <img src="{review.reviewer_profile_photo_url}" alt="{data.gdpr_alt_text}"></img>
+        </div>
+      </f:if>
+
+      <div>
+        <p class="review__user-name" itemscope itemprop="author" itemtype="https://schema.org/Person"><span
+            itemprop="name">{review.reviewer_display_name}</span></p>
+        <p class="review__user-date" itemprop="datePublished"
+          content='<f:format.date format="Y.m.d">{review.create_time}</f:format.date>'>
+          <f:format.date format="d.m.Y">{review.create_time}</f:format.date>
+        </p>
+      </div>
+    </div>
+    <div class="review__content">
+
+      <div class="review__rating" itemscope itemprop="reviewRating" itemtype="http://schema.org/Rating">
+        <meta itemprop="ratingValue" content="{review.star_rating}">
+        <meta itemprop="bestRating" content="{review.star_rating}">
+        <div>
+          <f:render partial="Stars" arguments="{stars:review.star_rating}" />
+        </div>
+      </div>
+
+      <p class="review__text">
+        {review.comment}
+      </p>
+      <p class="review__source">
+
+      </p>
+    </div>
+  </div>
+</f:section>
+
+</html>

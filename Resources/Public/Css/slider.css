@@ -1,0 +1,155 @@
+* {
+  box-sizing: border-box;
+}
+
+div.review-ext {
+  position: relative;
+}
+
+div.review-ext .space-before-extra-small {
+  padding-top: 2%;
+}
+div.review-ext .space-before-small {
+  padding-top: 4%;
+}
+div.review-ext .space-before-medium {
+  padding-top: 6%;
+}
+div.review-ext .space-before-large {
+  padding-top: 8%;
+}
+div.review-ext .space-before-extra-large {
+  padding-top: 10%;
+}
+div.review-ext .space-after-extra-small {
+  padding-bottom: 2%;
+}
+div.review-ext .space-after-small {
+  padding-bottom: 4%;
+}
+div.review-ext .space-after-medium {
+  padding-bottom: 6%;
+}
+div.review-ext .space-after-large {
+  padding-bottom: 8%;
+}
+div.review-ext .space-after-extra-large {
+  padding-bottom: 10%;
+}
+
+
+.spacer {
+  height: 50px;
+  margin: 0 50px 0 50px;
+  /* margin: 20px 0 -50px 0; use this if you want #container to have a 'bottom padding', in this case of 20px */
+  background: transparent;
+}
+
+.swiper-slide {
+  height:auto;
+  padding:30px;
+  border: 1px #333 solid;
+  background-color:#fff;
+}
+
+.review-ext .swiper-pagination {
+  bottom: auto;
+}
+
+.swiper-button-prev, .swiper-button-next {
+  font-weight:bold;
+  color:#dfdfdf;
+}
+
+@media screen and (max-width: 980px) {
+  .swiper-button-prev, .swiper-button-next {
+    display: none;
+  }
+}
+
+.swiper-button-prev {
+  left: 10px;
+}
+
+.swiper-button-next {
+  right: 10px;
+}
+
+.swiper-button-prev:hover, .swiper-button-next:hover {
+  color:#333;
+} 
+
+
+
+.swiper-slide .slide__profile_image img {
+  height:100%;
+}
+ .swiper-slide .slide__profile_image {
+  height: 15%;
+}
+ .swiper-slide .slide__stars {
+  height: 10%;
+}
+ .swiper-slide .slide__name {
+  height: 7%;
+  margin: 0;
+}
+ .swiper-slide .slide__date {
+  height: 7%;
+  margin: 0;
+}
+ .swiper-slide .slide__msg {
+  height: 66%;
+  padding-top:10px;
+  padding-bottom: 10px;
+}
+
+.swiper-grid-column>.swiper-wrapper {
+  flex-direction: row;
+}
+
+.slide__infoblock .left_block {
+  float: left;
+}
+
+.swiper-grid img.slide__reviewer_picture {
+  width: 50px;
+  padding-right: 10px;
+}
+
+.swiper-grid .slide__msg {
+  font-size: 14px;
+  overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 4; /* number of lines to show */
+           line-clamp: 4;
+   -webkit-box-orient: vertical;
+   height:50%;
+}
+
+.swiper-grid span.star_rating {
+  font-size: 1rem;
+  padding: 0;
+}
+
+.grid-slider.swiper-slide {
+  background-color: #fdfdfd;
+  margin:3px!important;
+  padding: 15px;
+  border: 0px;
+    margin: 3px!important;
+    padding: 15px;
+    box-shadow: 2px 2px 5px #92929278;
+}
+
+.swiper-grid div.star_rating {
+  padding: 0px;
+  margin: 0px;
+  height: 20%;
+}
+
+.swiper-grid .slide__infoblock {
+  height: 20%;
+  margin-top:5px:
+}

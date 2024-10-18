@@ -1,0 +1,1595 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+{namespace core = TYPO3\CMS\Core\ViewHelpers}
+
+<style>
+    .warpper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tab {
+        cursor: pointer;
+        padding: 10px 20px;
+        margin: 0;
+        background: #EE7202;
+        display: inline-block;
+        color: #fff;
+        border-radius: 3px 3px 0px 0px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    }
+
+    .panels {
+        background: #fff;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 4px;
+        min-height: 200px;
+        width: calc(100% - 45px);
+        margin-right: 5px;
+        padding: 20px 20px 30px;
+        overflow: scroll;
+        height: 400px;
+        border-top: 1px solid #e7e6e6;
+    }
+
+    .panel {
+        display: none;
+        animation: fadein 0.8s;
+    }
+
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .panel-title {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .radio {
+        display: none;
+    }
+
+    #one:checked ~ .panels #one-panel,
+    #two:checked ~ .panels #two-panel,
+    #four:checked ~ .panels #four-panel,
+    #five:checked ~ .panels #five-panel,
+    #six:checked ~ .panels #six-panel,
+    #seven:checked ~ .panels #seven-panel,
+    #three:checked ~ .panels #three-panel {
+        display: block;
+    }
+
+    #one:checked ~ .tabs #one-tab,
+    #two:checked ~ .tabs #two-tab,
+    #four:checked ~ .tabs #four-tab,
+    #five:checked ~ .tabs #five-tab,
+    #six:checked ~ .tabs #six-tab,
+    #seven:checked ~ .tabs #seven-tab,
+    #three:checked ~ .tabs #three-tab {
+        background: #fff;
+        color: #000;
+        border-top: 3px solid #EE7202;
+    }
+    .d-flex {
+        display: flex;
+    }
+    .file-upload-wrapper {
+        position: relative;
+    }
+    .file-upload-wrapper .file-upload-input {
+        position: absolute;
+        left: 0;
+        opacity: 0;
+        z-index: 1;
+        cursor: pointer;
+        width: 82px;
+    }
+    .my-4-9 {
+        margin: 4px 0px 9px 0;
+    }
+    .d-none {
+        display: none;
+    }
+    .file-upload-wrapper {
+        margin-top: -12px;
+    }
+    /* toggle btn */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 47px;
+        height: 20px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 15px;
+        width: 15px;
+        left: 3px;
+        bottom: 2.5px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked + .slider {
+        background-color: #EE7202;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #EE7202;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+    .uplodedImageTitle {
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .pad-3-4 {
+        padding: 3px 4px;
+        outline: none;
+    }
+    .color-field {
+        margin-top: 3px;
+        padding: 0;
+        margin-left: 20px;
+    }
+    .uploadImage{
+        flex-direction: column;
+    }
+    .uploadImage-cookie{
+        flex-direction: column;
+    }
+    .uploadImage-cookie img{
+        width: 200px;
+        height: auto;
+        object-fit: contain;
+    }
+    .uploadImage img{
+        width: 200px;
+        height: auto;
+        object-fit: contain;
+    }
+    .field-style {
+        border-color: #D1D1D1;
+        border: 1px solid #D1D1D1;
+        border-radius: 6px;
+        padding: 6px 9px;
+        width: 340px;
+        outline: none;
+    }
+    .mt-5px {
+        margin-top: 5px;
+    }
+    input::-webkit-color-swatch {
+        border-color: red;
+        border: 0;
+    }
+    .color-span {
+        border-radius: 6px;
+        box-shadow: 0 0 6px rgba(0,0,0,.15);
+        height: 32px;
+        margin-left: 16px;
+        overflow: hidden;
+        width: 32px;
+        margin-top: 3px;
+    }
+    input[type="color"].color-field {
+        border: none;
+        cursor: pointer;
+        height: 41px;
+        left: -3px;
+        position: relative;
+        top: -7px;
+        width: 41px;
+        margin-left: 0;
+    }
+    .uploaded-image {
+        width: 350px;
+        height: 250px;
+        background-color: white;
+        box-shadow: 0px 0px 6px 0px #00000026;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .cookie-icon {
+        width: 150px;
+        height: 100px;
+        background-color: white;
+        box-shadow: 0px 0px 6px 0px #00000026;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px;
+    }
+    .cookie-icon img {
+        width: 70px;
+        height: auto;
+        object-fit: contain;
+    }
+    .btn-bg-transparent {
+        background: transparent;
+        border-radius: 6px;
+        border: 1px solid #EE7202;
+        color: #EE7202;
+        padding: 8px 17px;
+        margin-top: 12px;
+        width: 108px;
+    }
+    .w-185px {
+        width: 185px;
+    }
+
+    .field_label {
+        color:  #e90b0b;
+        white-space: nowrap;
+        font: 500 16px/24px Poppins, sans-serif;
+    }
+
+    .field_input {
+        align-items: center;
+        border-radius: 6px;
+        border: 1px solid  #d1d1d1;
+        background-color:  #fff;
+        display: flex;
+        margin-top: 8px;
+        height: 37px;
+        flex-direction: column;
+        padding-left: 8px;
+    }
+    .location_fields{
+        display: flex;
+        margin-top: 34px;
+        width: 588px;
+        max-width: 100%;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    .location_fields .field_input{
+        width: 282px;
+    }
+    .location_coordinates {
+        display: flex;
+        margin-top: 24px;
+        width: 588px;
+        max-width: 100%;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .coordinate_input {
+        align-items: center;
+        border-radius: 6px;
+        border: 1px solid #d1d1d1;
+        background-color: #fff;
+        display: flex;
+        margin-top: 8px;
+        height: 37px;
+        flex-direction: column;
+        width: 282px;
+        padding-left: 8px;
+    }
+
+    .coordinate_field {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .coordinate_label {
+        color: #e90b0b;
+        white-space: nowrap;
+        font: 500 16px/24px Poppins, sans-serif;
+    }
+
+    .coordinate_input {
+        align-items: center;
+        border-radius: 6px;
+        border: 1px solid #d1d1d1;
+        background-color: #fff;
+        display: flex;
+        margin-top: 8px;
+        height: 37px;
+        flex-direction: column;
+    }
+
+    .add_location {
+        color:  #ee7202;
+        border-radius: 6px;
+        border: 1px solid #ee7202;
+        background-color: #fff;
+        margin-top: 35px;
+        width: fit-content;
+        padding: 8px 17px;
+        margin-bottom: 30px;
+        cursor: pointer;
+    }
+    /* Popup Styles */
+    #popupForm {
+        display: none;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        z-index: 1000;
+        padding: 20px;
+        padding-right: 10px;
+        width: 350px;
+        border: 0.5px solid #000;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0,0,0,.07);
+        transition: all .3s ease-out;
+        font-family: Arial;
+    }
+
+    /* The Close Button */
+    #popupForm button#locBtn[type="button"] {
+        background-color: #fff;
+        color: #ee7202;
+        border: none;
+        cursor: pointer;
+        margin-top: 18px;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    #popupForm #plusBtn{
+        font-size: 20px;
+    }
+
+    /* The Submit Button */
+    #popupForm input[type="button"] {
+        width: 100%;
+        background-color: #ee7202;
+        color: white;
+        border-radius: 6px;
+        padding: 9px 14px;
+        border: none;
+        cursor: pointer;
+        font-size: 15px;
+    }
+    #popupForm input#cnclBtn{
+        background-color: white;
+        color: #ee7202;
+        border: 1px solid #ee7202;
+    }
+    #popupForm input[type="button"]:hover{
+        outline: none;
+    }
+    #popupForm button:focus-visible{
+        outline: none;
+    }
+    #popupForm #popupCrossBtn{
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 17px;
+        padding: 1rem;
+        padding-right: 25px;
+    }
+    #popupCrossBtn img{
+        filter: brightness(0.5);
+        width: 12px;
+        height: 12px;
+    }
+    #popupForm h2{
+        text-align: center;
+        color: #343434;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: .2px;
+        line-height: 30px;
+        margin-bottom: 24px;
+        margin-top: 24px;
+    }
+    /* Reviews Tab Styling */
+    #four-panel table, #seven-panel table{
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+    }
+    #four-panel tr, #seven-panel tr{
+        border-bottom: 1px solid #e7e6e6;
+    }
+    #four-panel .row-data, #seven-panel .row-data{
+        background: #e7e6e6;
+        text-align: left;
+    }
+    #four-panel .row-data th, #seven-panel .row-data th{
+        color: #343434;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        min-width: 200px;
+        padding: 16px;
+    }
+    #four-panel .row-data-inner, #seven-panel .row-data-inner{
+        border: 1px solid #e7e6e6;
+    }
+    #four-panel tr td, #seven-panel tr td{
+        color: #343434;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        padding: 16px;
+    }
+    #searchDiv{
+        width:100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px 0 30px;
+    }
+    #fourPanelSearch, #sevenPanelSearch{
+        border: 1px solid #e7e6e6;
+        border-radius: 6px 0 0 6px;
+        border-right:none;
+        font-size: 14px;
+        height: 40px;
+        outline: none;
+        padding: 8px 12px;
+        width: 215px;
+    }
+    #four-panel-search-img, #seven-panel-search-img{
+        cursor:pointer;
+        background: #ee7202;
+        border-radius: 0 6px 6px 0;
+        padding: 12px 10px;
+    }
+    #review-edit-btn{
+        color: #fff;
+        background: #ee7202;
+        border-radius: 6px;
+        padding: 7px 14px;
+        border: none;
+        cursor: pointer;
+    }
+    #overlay {
+        -webkit-backdrop-filter: blur(3px);
+        backdrop-filter: blur(3px);
+        background: rgba(52,52,52,.8);
+        left: 0;
+        min-height: 100%;
+        position: fixed;
+        top: 0;
+        transition: all .3s ease-out;
+        width: 100%;
+        z-index: 11;
+    }
+    #popupForm #addLocMain{
+        position: relative;
+        padding: 25px 0 15px;
+        border-bottom: 1px solid #e7e6e6;
+    }
+    #popupForm .loc-cross-btn{
+        position: absolute;
+        top: 8px;
+        right: 0;
+        background: transparent;
+        border: none;
+        font-size: 17px;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+    }
+    #popupForm .loc-cross-btn img{
+        filter: brightness(0.5);
+        width: 13px;
+        height: 15px;
+    }
+    #popupForm .loc-main{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+    #popupForm .loc-main label{
+        margin-bottom: 3px;
+        font-size: 15px;
+    }
+    #popupForm .loc-main label span{
+        color: red;
+    }
+    #popupForm .loc-main input{
+        border: 1px solid #e7e6e6;
+        border-radius: 6px;
+        font-size: 14px;
+        outline: none;
+        padding: 7px 10px;
+    }
+    #popupForm .loc-main textarea{
+        border: 1px solid #e7e6e6;
+        border-radius: 6px;
+        font-size: 14px;
+        outline: none;
+        padding: 7px 10px;
+    }
+    #locationFieldsContainer{
+        max-height: 336px;
+        overflow: scroll;
+        padding-right: 15px;
+    }
+    #actionBtns{
+        margin-right: 10px;
+    }
+
+</style>
+<div class="warpper">
+    <div id="overlay" class="d-none"></div>
+    <div class="d-none" id="oldResources">
+        <f:for each="{gdprManager.locations}" as="location">
+            <div>
+                <div class="mapname">{location.title}</div>
+                <span class="mapAddress">{location.address}</span>
+                <span class="maplat">{location.lat}</span>
+                <span class="maplon">{location.lon}</span>
+            </div>
+
+        </f:for>
+        <span class="mapZoom" id="mapZoom">{map.zoom}</span>
+    </div>
+
+
+    <f:if condition="!{google_review}">
+        <input class="radio" id="one" name="group" type="radio" checked>
+
+    </f:if>
+    <f:if condition="!{google_review}">
+        <input class="radio" id="two" name="group" type="radio">
+
+    </f:if>
+    <f:if condition="{googlemaps}">
+        <input class="radio" id="three" name="group" type="radio">
+    </f:if>
+    <f:if condition="{google_review} && !{gtm}">
+        <input class="radio" id="four" name="group" type="radio" checked>
+    </f:if>
+    <f:if condition="{gtm}">
+        <input class="radio" id="five" name="group" type="radio" checked>
+    </f:if>
+    <f:if condition="{matomo}">
+        <input class="radio" id="six" name="group" type="radio" checked>
+    </f:if>
+    <f:if condition="{matomo} || {gtm} || {meta}">
+        <input class="radio" id="seven" name="group" type="radio" checked>
+    </f:if>
+
+    <div class="tabs">
+        <f:if condition="!{google_review} && {gtm} && {matomo} && {meta}">
+            <label class="tab" id="one-tab" for="one"><f:translate key="content.tab" extensionName="GdprExtensionsComMp" /></label>
+        </f:if>
+        <f:if condition="!{google_review} && {gtm} && {matomo} && {meta}">
+            <label class="tab" id="two-tab" for="two"><f:translate key="content.style.tab" extensionName="GdprExtensionsComMp" /></label>
+        </f:if>
+
+        <f:if condition="{googlemaps}">
+            <label class="tab" id="three-tab" for="three"><f:translate key="content.map.tab" extensionName="GdprExtensionsComMp" /></label>
+        </f:if>
+        <f:if condition="{google_review} && !{gtm} && !{matomo} && !{meta}">
+            <label class="tab" id="four-tab" for="four"><f:translate key="reviews.tab" extensionName="GdprExtensionsComMp" /></label>
+        </f:if>
+        <f:comment>
+            <f:if condition="{gtm}">
+                <label class="tab" id="five-tab" for="five"><f:translate key="gtm.tab" extensionName="GdprExtensionsComMp" /></label>
+            </f:if>
+            <f:if condition="{matomo}">
+                <label class="tab" id="six-tab" for="six"><f:translate key="matomo.tab" extensionName="GdprExtensionsComMp" /></label>
+            </f:if>
+        </f:comment>
+        <f:if condition="{matomo} || {gtm}|| {meta}">
+            <f:if condition="{matomo}">
+                <f:then>
+                    <label class="tab" id="seven-tab" for="seven"><f:translate key="matomo.tab" extensionName="GdprExtensionsComMp" /></label>
+                </f:then>
+            </f:if>
+            <f:if condition="{gtm}">
+                <f:then>
+                    <label class="tab" id="seven-tab" for="five"><f:translate key="gtm.tab" extensionName="GdprExtensionsComMp" /></label>
+                </f:then>
+            </f:if>
+            <f:if condition="{meta}">
+                <f:then>
+                    <label class="tab" id="seven-tab" for="five"><f:translate key="meta.tab" extensionName="GdprExtensionsComMp" /></label>
+                </f:then>
+            </f:if>
+        </f:if>
+
+    </div>
+    <div class="panels">
+        <f:if condition="!{google_review} && {gtm} && {matomo} && {meta}">
+            <f:then>
+                <div class="panel" id="one-panel">
+                    <div class="">
+                        <label for="heading">
+                            <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading" extensionName="GdprExtensionsComMp"/>
+                        </label><br />
+                        <f:form.textfield property="heading" id="heading" class="my-4-9 pad-3-4 field-style"/><br />
+                        <label for="buttonText">
+                            <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text" extensionName="GdprExtensionsComMp" />
+                        </label><br />
+                        <f:form.textfield property="buttonText" id="buttonText" class="my-4-9 pad-3-4 field-style"/><br />
+                        <label for="content">
+                            <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.content" extensionName="GdprExtensionsComMp"/>
+                        </label><br />
+                        <f:form.textarea property="content" id="content" cols="40" rows="15" class="my-4-9 pad-3-4 field-style"/><br />
+                    </div>
+                </div>
+            </f:then>
+
+        </f:if>
+        <f:if condition="!{google_review} && {gtm} && {matomo} && {meta}">
+            <div class="panel" id="two-panel">
+                <div class="d-flex">
+                    <div class="uplodedImageTitle">
+                        <f:translate key="tx_gdprextensionscomyoutubeshorts_domain_model_gdprmanager" extensionName="GdprExtensionsComMp" />
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <f:form.textfield property="enableBackgroundImage" id="enabledbackgroundImage" class="d-none" />
+                </div>
+                <div class="uploadImage d-none">
+                    <f:if condition="{gdprManager.backgroundImage} == ''">
+                        <f:then>
+                            <div class="uploaded-image">
+                                <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/Extension.svg" id="selected-image"
+                                         alt=""
+                                         class="back_img" />
+                            </div>
+
+                        </f:then>
+                        <f:else>
+                            <div class="uploaded-image">
+                                <f:image src="{gdprManager.backgroundImage}" id="selected-image"
+                                         alt=""
+                                         class="back_img" />
+                            </div>
+                        </f:else>
+                    </f:if>
+                    <f:form.textarea property="backgroundImage" id="backgroundImage" cols="40" rows="15"  class="d-none" /><br />
+                    <div class="file-upload-wrapper my-4-9" id="selected-image-container">
+                        <button class="choose_file btn-bg-transparent" ><f:translate key="choose.file" extensionName="GdprExtensionsComMp" /></button>
+                        <input
+                            type="file"
+                            id="file-input"
+                            name="image"
+                            accept="image/*"
+                            class="file-upload-input btn-bg-transparent"
+                        />
+                    </div>
+                </div>
+
+                <div class="bg-color-parent d-block">
+                    <label for="backgroundImageColor">
+                        <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color" extensionName="GdprExtensionsComMp"/>
+                    </label><br />
+                    <div class="d-flex">
+                        <f:form.textfield property="backgroundImageColor" id="backgroundImageColor" class="my-4-9 pad-3-4 colorField field-style w-185px"/>
+                        <span class="color-span">
+						<input type="color" id="favcolor" name="favcolor" value="{f:if(condition:'{gdprManager.backgroundImageColor}',then:'{gdprManager.backgroundImageColor}',else:'#000')}" class="color-field bg-empty-color">
+					</span>
+                    </div>
+                </div>
+                <br />
+                <label for="buttonColor">
+                    <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color" extensionName="GdprExtensionsComMp" />
+                </label><br />
+                <div class="d-flex">
+                    <f:form.textfield property="buttonColor" id="buttonColor" class="my-4-9 pad-3-4 colorField field-style w-185px"/>
+                    <span class="color-span">
+					<input type="color" id="favcolor" name="favcolor" value="{f:if(condition:'{gdprManager.buttonColor}',then:'{gdprManager.buttonColor}',else:'#000')}" class="color-field">
+				</span>
+                </div>
+                <br />
+                <label for="textColor">
+                    <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.text_color" extensionName="GdprExtensionsComMp" />
+                </label><br />
+                <div class="d-flex">
+                    <f:form.textfield property="textColor" id="textColor" class="my-4-9 pad-3-4 colorField field-style w-185px"/>
+                    <span class="color-span">
+					<input type="color" id="favcolor" name="favcolor" value="{f:if(condition:'{gdprManager.textColor}',then:'{gdprManager.textColor}',else:'#000')}" class="color-field">
+				</span>
+                </div>
+                <br />
+                <label for="buttonTextColor">
+                    <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text_color" extensionName="GdprExtensionsComMp" />
+                </label><br />
+                <div class="d-flex">
+                    <f:form.textfield property="buttonTextColor" id="buttonTextColor" class="my-4-9 pad-3-4 colorField field-style w-185px"/>
+                    <span class="color-span">
+					<input type="color" id="buttonTextColor" name="favcolor" value="{f:if(condition:'{gdprManager.buttonTextColor}',then:'{gdprManager.buttonTextColor}',else:'#000')}" class="color-field">
+				</span>
+                </div>
+                <br />
+                <label for="buttonShape">
+                    <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_shape" extensionName="GdprExtensionsComMp" />
+                </label><br />
+                <div class="d-flex">
+                    <f:form.select name="buttonShape" property="buttonShape" class="field-style mt-5px w-185px">
+                        <f:form.select.option value="0"><f:translate key="shape.default" extensionName="GdprExtensionsComMp" /></f:form.select.option>
+                        <f:form.select.option value="round"><f:translate key="shape.round" extensionName="GdprExtensionsComMp" /></f:form.select.option>
+                        <f:form.select.option value="square"><f:translate key="shape.square" extensionName="GdprExtensionsComMp" /></f:form.select.option>
+                    </f:form.select>
+                </div>
+                <br />
+            </div>
+        </f:if>
+        <f:if condition="{googlemaps}">
+            <div class="panel" id="three-panel">
+                <label for="mapApi">
+                    <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_api" extensionName="GdprExtensionsComMp"/>
+                </label><br />
+                <f:form.textfield property="mapApi" id="mapApi" class="my-4-9 pad-3-4 field-style"/><br />
+                <div id="locations-container" style="border-top: 2px solid #E7E6E6; margin-top: 33px;">
+                    <div class="location_fields">
+                        <div class="location_field">
+                            <div class="field_label">
+                        <span style="color: #0e0f0f">
+                        <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_title" extensionName="GdprExtensionsComMp"/>
+                        </span>
+                                <span style="color: rgba(233, 11, 11, 1)">
+                                *
+                        </span>
+                            </div>
+                            <input type="text" id="title0" class="field_input" name="tx_GdprTwoXMatomo_web_GdprTwoXMatomogdprmanager[locations][0][title]"
+                                   value="" />
+                        </div>
+                        <div class="location_field">
+                            <div class="field_label">
+                        <span style="color: #0e0f0f">
+                        <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_description" extensionName="GdprExtensionsComMp"/>
+                        </span>
+                                <span style="color: rgba(233, 11, 11, 1)">
+                                *
+                        </span>
+                            </div>
+                            <input type="text" id="address0" class="field_input" name="tx_GdprTwoXMatomo_web_GdprTwoXMatomogdprmanager[locations][0][address]"
+                                   value="" />
+                        </div>
+                    </div>
+                    <div class="location_coordinates">
+                        <div class="coordinate_field">
+                            <div class="coordinate_label">
+                        <span style="color: #0e0f0f">
+                        <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_latitude" extensionName="GdprExtensionsComMp"/>
+                        </span>
+                                <span style="color: rgba(233, 11, 11, 1)">
+                                *
+                        </span>
+                            </div>
+                            <input type="number" class="coordinate_input" id="latitude0"
+                                   name="tx_GdprTwoXMatomo_web_GdprTwoXMatomogdprmanager[locations][0][lat]" value="" step="any" />
+                        </div>
+                        <div class="coordinate_field">
+                            <div class="coordinate_label">
+                        <span style="color: #0e0f0f">
+                        <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_longitude" extensionName="GdprExtensionsComMp"/>
+                        </span>
+                                <span style="color: rgba(233, 11, 11, 1)">
+                                *
+                        </span>
+                            </div>
+                            <input type="number" class="coordinate_input" id="longitude0"
+                                   name="tx_GdprTwoXMatomo_web_GdprTwoXMatomogdprmanager[locations][0][lon]" value="" step="any" />
+                        </div>
+                    </div>
+                </div>
+
+                <button id="add-location-btn" file class="add_location">
+                    <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.map_addlocation" extensionName="GdprExtensionsComMp"/>
+                </button>
+            </div>
+            <script>
+                // for Map locations
+                const mapName = document.querySelectorAll('.mapname')
+                const mapAddress = document.querySelectorAll('.mapAddress')
+                const mapLat = document.querySelectorAll('.maplat')
+                const mapLon = document.querySelectorAll('.maplon')
+                let count = 0;
+
+                let locationData = {
+                    location0: { title: "", address: "", latitude: "", longitude: "" },
+
+                };
+
+                const addLocationButton = document.getElementById("add-location-btn");
+                const locationsContainer = document.getElementById(
+                    "locations-container"
+                );
+
+                addLocationButton.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    addLocation();
+
+                });
+
+
+                const addLocation = () => {
+                    count++;
+                    const locationFieldSet = document.createElement("div");
+                    locationFieldSet.className = "location-field-set";
+                    locationFieldSet.dataset.locationId = `location${count}`;
+
+                    locationFieldSet.innerHTML = `
+            <div style="border-top: 2px solid #E7E6E6; margin-top: 33px;">
+            <div class="close-location" style="display: flex; flex-direction: row-reverse; margin-top:18px; cursor: pointer">
+                &times;
+            </div>
+            <div class="location_fields" style="border-top: 2px black; margin-top:0;">
+                <div class="location_field">
+                    <label for="title${count}">Title <b style="color:red">*</b></label>
+                    <input type="text"
+                           id="title${count}"
+                           name="tx_GdprTwoXMatomo_web_GdprTwoXMatomogdprmanager[locations][${count}][title]"
+                           class="field_input" />
+                </div>
+                <div class="location_field">
+                    <label for="address${count}">Description <b style="color:red">*</b></label>
+                    <input type="text"
+                           id="address${count}"
+                           name="tx_GdprTwoXMatomo_web_GdprTwoXMatomogdprmanager[locations][${count}][address]"
+                           class="field_input" />
+                </div>
+                </div>
+                <br/>
+                <div style="display:flex;gap:20px">
+                <div class="coordinate_field">
+                    <label for="latitude${count}">Latitude <b style="color:red">*</b></label>
+                    <input type="number"
+                           id="latitude${count}"
+                           name="tx_GdprTwoXMatomo_web_GdprTwoXMatomogdprmanager[locations][${count}][lat]"
+                           class="coordinate_input"
+                           step="any"
+                           data-coordinate-type="latitude" />
+                </div>
+                <div class="coordinate_field">
+                    <label for="longitude${count}">Longitude <b style="color:red">*</b></label>
+                    <input type="number"
+                           id="longitude${count}"
+                           name="tx_GdprTwoXMatomo_web_GdprTwoXMatomogdprmanager[locations][${count}][lon]"
+                           class="coordinate_input"
+                           step="any"
+                           data-coordinate-type="longitude" />
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+  `;
+
+                    locationsContainer.appendChild(locationFieldSet);
+
+                    // Close button handler
+                    locationFieldSet
+                        .querySelector(".close-location")
+                        .addEventListener("click", function () {
+                            delete locationData[locationFieldSet.dataset.locationId];
+                            locationsContainer.removeChild(locationFieldSet);
+                            // initMap();
+                        });
+
+                    // Initialize the location data object for this set
+                    locationData[`location${count}`] = {
+                        title: "",
+                        address: "",
+                        latitude: "",
+                        longitude: "",
+                    };
+
+                    // Function to update location data object when an input changes
+                    const updateLocationData = (element, type) => {
+                        const locationId = element.closest(".location-field-set")
+                            .dataset.locationId;
+                        locationData[locationId][type] = element.value.trim();
+                        // initMap();
+                    };
+
+                    // Event listeners for change on latitude and longitude
+                    locationFieldSet
+                        .querySelector(`#latitude${count}`)
+                        .addEventListener("change", function () {
+                            updateLocationData(this, "latitude");
+                        });
+
+                    locationFieldSet
+                        .querySelector(`#longitude${count}`)
+                        .addEventListener("change", function () {
+                            updateLocationData(this, "longitude");
+                        });
+
+                    showPopup = true;
+                }
+
+                if (mapName && mapName.length > 0) {
+                    function populateFields(i) {
+                        document.getElementById(`title` + i).value = locationData[`location${i}`]["title"];
+                        document.getElementById(`address${i}`).value = locationData[`location${i}`]["address"];
+                        document.getElementById(`latitude${i}`).value = parseFloat(locationData[`location${i}`]["latitude"]);
+                        document.getElementById(`longitude${i}`).value = parseFloat(locationData[`location${i}`]["longitude"]);
+                    }
+                    mapName.forEach((v, i) => {
+                        if (mapName.length != i) {
+                            addLocation()
+                            locationData['location' + i]["title"] = v.innerHTML;
+                            locationData['location' + i]["address"] = mapAddress[i].innerHTML;
+                            locationData['location' + i]["latitude"] = mapLat[i].innerHTML / 1000000;
+                            locationData['location' + i]["longitude"] = mapLon[i].innerHTML / 1000000;
+                        }
+                    })
+                    setTimeout(function () {
+                        for (let i = 0; i < Object.keys(locationData).length ; i++) {
+                            populateFields(i);
+                        }
+                    }, 1000);
+                }
+            </script>
+        </f:if>
+        <f:if condition="{google_review} && !{gtm} && !{matomo} && !{meta}">
+            <div class="panel" id="four-panel">
+                <div id="searchDiv">
+                    <input type="search" id="fourPanelSearch" class="four-panel-search" placeholder="Search...">
+                    <label for="fourPanelSearch" id="four-panel-search-img"><core:icon identifier="search-icon" size="small" /></label>
+                </div>
+                <div class="">
+                    <table>
+                        <thead>
+                        <tr class="row-data">
+                            <th style="border-radius: 8px 0 0 0;"><f:translate key="root.pid" extensionName="GdprExtensionsComMp" /></th>
+                            <th><f:translate key="base.url" extensionName="GdprExtensionsComMp" /></th>
+                            <th style="border-radius: 0 8px 0 0;"><f:translate key="actions.head" extensionName="GdprExtensionsComMp" /></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <f:for each="{sites}" as="config" key="siteKey">
+                            <tr class="row-data-inner">
+                                <td>{config.title} (ID: {config.rootPageId})</td>
+                                <td>{config.base}</td>
+                                <td>
+                                    <button id="review-edit-btn" type="button" onclick="editLocations('{config.rootPageId}')">
+                                        <f:translate key="add.edit.btn" extensionName="GdprExtensionsComMp" />
+                                    </button>
+                                </td>
+                            </tr>
+                        </f:for>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+            <!-- Popup Form -->
+            <div id="popupForm" style="display:none;">
+            <div id="locationForm">
+                <!-- Hidden field for rootPageId -->
+                <input type="hidden" id="rootPageId" name="rootPageId">
+                <button id="popupCrossBtn" type="button" onclick="closePopup()">
+                    <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/cross.png" alt="x" />
+                </button>
+                <h2><f:translate key="add.your.loc" extensionName="GdprExtensionsComMp" /></h2>
+
+                <!-- Location fields container -->
+                <div id="locationFieldsContainer" class="">
+                    <!-- Initial location fields -->
+                    <div class="location-fields">
+                        <span class="loc-main">
+                            <label for="title"><f:translate key="title.txt" extensionName="GdprExtensionsComMp" /></label>
+                            <input type="text" id="title" class="title" name="title[]">
+                        </span>
+                        <span class="loc-main">
+                            <label for="apiKey"><f:translate key="dash.api.key" extensionName="GdprExtensionsComMp" /></label>
+                            <input type="text" id="apikey" class="apiKey" name="apiKey[]">
+                        </span>
+                    </div>
+                </div>
+                <button id="locBtn" type="button" onclick="addLocationFields()">
+                    <span id="plusBtn">+</span><f:translate key="add.loc" extensionName="GdprExtensionsComMp" />
+                </button><br>
+                <div id="actionBtns">
+                    <input type="button" value="Submit" onclick="submitForm()"><br><br>
+                    <input id="cnclBtn" type="button" value="Cancel" onclick="closePopup()">
+                </div>
+            </div>
+            </div>
+
+            <script>
+            var currentRootPageId = null;
+            const saveLocationUrl =
+                document.getElementById("uploadImageUrl").innerText;
+
+            document.getElementById('fourPanelSearch').addEventListener('input', function() {
+                var searchValue = this.value.toLowerCase();
+                var tableRows = document.querySelectorAll('.row-data-inner');
+
+                tableRows.forEach(function(row) {
+                    var rowText = row.textContent.toLowerCase();
+                    if (rowText.includes(searchValue)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+            function addLocationFields(title = '', apiKey = '') {
+                var container = document.getElementById('locationFieldsContainer');
+                var newFieldSet = document.createElement('div');
+                newFieldSet.className = 'location-fields';
+                newFieldSet.innerHTML =
+                '<div id="addLocMain">' +
+                    '<button class="loc-cross-btn" type="button" onclick="removeLocationField(this)">' +
+                        '<f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/delete.png" alt="x" />' +
+                    '</button>' +
+                    '<span class="loc-main">' +
+                        '<label for="title"><f:translate key="title.txt" extensionName="GdprExtensionsComMp" /><span>*</span></label>' +
+                        '<input type="text" class="title" name="title[]" value="' + title + '">' +
+                    '</span>' +
+                    '<span class="loc-main">' +
+                        '<label for="apiKey"><f:translate key="dash.api.key" extensionName="GdprExtensionsComMp" /><span>*</span></label>' +
+                        '<input type="text" class="apiKey" name="apiKey[]" value="' + apiKey + '">' +
+                    '</span>' +
+                '</div>';
+                container.appendChild(newFieldSet);
+            }
+
+            function removeLocationField(button) {
+                // Remove the parent .location-fields div
+                button.parentElement.remove();
+            }
+
+            function openPopup(rootPageId) {
+                currentRootPageId = rootPageId;
+                document.getElementById('rootPageId').value = rootPageId;
+                document.getElementById('popupForm').style.display = 'block';
+            }
+
+
+            function closePopup() {
+                document.getElementById('popupForm').style.display = 'none';
+                document.getElementById('overlay').classList.add('d-none');
+            }
+
+            function editLocations(rootPageId) {
+                currentRootPageId = rootPageId;
+                document.getElementById('rootPageId').value = rootPageId;
+
+                // Clear existing fields
+                var container = document.getElementById('locationFieldsContainer');
+                container.innerHTML = '';
+
+                // Fetch existing location data
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", saveLocationUrl + "&rootPageId=" + rootPageId, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        var locations = response.locations;
+                        // Populate the form with existing location data
+                        if(locations == ''){
+                            addLocationFields();
+                        }else{
+                            locations.forEach(function(location) {
+                                addLocationFields(location.title, location.apiKey);
+                            });
+                        }
+
+                        // Show the popup form
+                        document.getElementById('popupForm').style.display = 'block';
+                        document.getElementById('overlay').classList.remove('d-none');
+                    }
+                };
+                xhr.send();
+            }
+
+
+            function submitForm() {
+                var rootPageId = document.getElementById('rootPageId').value;
+                var titles = document.querySelectorAll('.title');
+                var apiKeys = document.querySelectorAll('.apiKey');
+                var data = {
+                    actionType: 'addLocation', // Add the actionType parameter
+                    locations: [] // Create a nested array for locations
+                };
+
+                if(titles.length == 0){
+                    data.locations.push({
+                        rootPageId: rootPageId,
+                        title: titles.value,
+                        apiKey: apiKeys.value
+                    });
+                }else{
+                    for (var i = 0; i < titles.length; i++) {
+                        data.locations.push({
+                            rootPageId: rootPageId,
+                            title: titles[i].value,
+                            apiKey: apiKeys[i].value
+                        });
+                    }
+                }
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", saveLocationUrl, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        closePopup();
+                    }
+                };
+                xhr.send(JSON.stringify(data));
+            }
+            </script>
+        </f:if>
+        <f:comment>
+            <f:if condition="{gtm}">
+                <div class="panel" id="five-panel">
+                    <div class="">
+                        <label for="heading">
+                            <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.gtm_code" extensionName="GdprExtensionsComMp"/>
+                        </label><br />
+                        <f:form.textfield property="gtmCode" id="gtmCode" class="my-4-9 pad-3-4 field-style"/><br />
+
+                    </div>
+                </div>
+            </f:if>
+            <f:if condition="{matomo}">
+                <div class="panel" id="six-panel">
+                    <div class="">
+                        <label for="heading">
+                            <f:translate key="tx_gdprextensionscomyoutube_domain_model_gdprmanager.meta_code" extensionName="GdprExtensionsComMp"/>
+                        </label><br />
+                        <f:form.textarea property="matomoCode" id="matomoCode" class="my-4-9 pad-3-4 field-style"/><br />
+
+                    </div>
+                </div>
+            </f:if>
+        </f:comment>
+
+        <f:if condition="{gtm} || {matomo} || {meta}">
+            <div class="panel" id="seven-panel">
+                <div id="searchDiv">
+                    <input type="search" id="sevenPanelSearch" class="seven-panel-search" placeholder="Search...">
+                    <label for="sevenPanelSearch" id="seven-panel-search-img"><core:icon identifier="search-icon" size="small" /></label>
+                </div>
+                <div class="">
+                    <table>
+                        <thead>
+                        <tr class="row-data">
+                            <th style="border-radius: 8px 0 0 0;"><f:translate key="root.pid" extensionName="GdprExtensionsComMp" /></th>
+                            <th><f:translate key="base.url" extensionName="GdprExtensionsComMp" /></th>
+                            <th style="border-radius: 0 8px 0 0;"><f:translate key="actions.head" extensionName="GdprExtensionsComMp" /></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <f:for each="{sites}" as="config" key="siteKey">
+                            <tr class="row-data-inner">
+                                <td>{config.title} (ID: {config.rootPageId})</td>
+                                <td>{config.base}</td>
+                                <f:if condition="{gtm}">
+                                    <f:then>
+                                        <td>
+                                            <button id="review-edit-btn" type="button" onclick="editLocations('{config.rootPageId}','gtm','{config.base}')">
+                                                <f:translate key="add.edit.btn" extensionName="GdprExtensionsComMp" />
+                                            </button>
+                                        </td>
+                                    </f:then>
+                                </f:if>
+                                <f:if condition="{matomo}">
+                                    <f:then>
+                                        <td>
+                                            <button id="review-edit-btn" type="button" onclick="editLocations('{config.rootPageId}','matomo','{config.base}')">
+                                                <f:translate key="add.edit.btn" extensionName="GdprExtensionsComMp" />
+                                            </button>
+                                        </td>
+                                    </f:then>
+                                </f:if>
+                                <f:if condition="{meta}">
+                                    <f:then>
+                                        <td>
+                                            <button id="review-edit-btn" type="button" onclick="editLocations('{config.rootPageId}','meta','{config.base}')">
+                                                <f:translate key="add.edit.btn" extensionName="GdprExtensionsComMp" />
+                                            </button>
+                                        </td>
+                                    </f:then>
+                                </f:if>
+
+                            </tr>
+                        </f:for>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+            <!-- Popup Form -->
+            <div id="popupForm" style="display:none;">
+                <div id="locationForm">
+                    <!-- Hidden field for rootPageId -->
+                    <input type="hidden" id="rootPageId" name="rootPageId">
+                    <input type="hidden" id="trackingTypeId" name="trackingType">
+                    <input type="hidden" id="trackingRootPageUrl" name="trackingRootPageUrl">
+                    <button id="popupCrossBtn" type="button" onclick="closePopup()">
+                        <f:image src="EXT:gdpr_extensions_com_mp/Resources/Public/Icons/cross.png" alt="x" />
+                    </button>
+                    <h2 id="trackTitle"><f:translate key="add.your.loc" extensionName="GdprExtensionsComMp" /></h2>
+
+                    <!-- Location fields container -->
+                    <div id="locationFieldsContainer" class="">
+                        <!-- Initial location fields -->
+                        <div class="location-fields">
+                        <span class="loc-main">
+                            <label for="title"><f:translate key="title.txt" extensionName="GdprExtensionsComMp" /></label>
+                            <input type="text" id="title" class="title" name="title[]">
+                        </span>
+                        <span class="loc-main">
+                            <label for="matomoHeading"><f:translate key="heading.txt" extensionName="GdprExtensionsComMp" /></label>
+                            <input type="text" id="matomoHeading" class="matomoHeading" name="matomoHeading">
+                        </span>
+                        <span class="loc-main">
+                            <label for="matomoDesc"><f:translate key="desc.txt" extensionName="GdprExtensionsComMp" /></label>
+                            <input type="text" id="matomoDesc" class="matomoDesc" name="matomoDesc">
+                        </span>
+                        </div>
+                    </div>
+                    <div id="actionBtns">
+                        <input type="button" value="Submit" class="btn-bg" id="trackSubmit" onclick="submitForm()"><br><br>
+                        <input id="cnclBtn" type="button" value="Cancel" onclick="closePopup()">
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                var currentRootPageId = null;
+                const saveLocationUrl =
+                    document.getElementById("uploadImageUrl").innerText;
+
+                document.getElementById('sevenPanelSearch').addEventListener('input', function() {
+                    var searchValue = this.value.toLowerCase();
+                    var tableRows = document.querySelectorAll('.row-data-inner');
+
+                    tableRows.forEach(function(row) {
+                        var rowText = row.textContent.toLowerCase();
+                        if (rowText.includes(searchValue)) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+
+                function addLocationFields(title = '',heading='',desc='',type ='') {
+                    var container = document.getElementById('locationFieldsContainer');
+                    var newFieldSet = document.createElement('div');
+                    newFieldSet.className = 'location-fields';
+                    if(type === 'matomo'){
+                        var matomoData =atob(title);
+                        newFieldSet.innerHTML =
+                            '<div id="addLocMain">' +
+                            '<span class="loc-main">' +
+                            '<label for="title"><f:translate key="title.txt.matomo" extensionName="GdprExtensionsComMp" /><span>*</span></label>' +
+                            '<textarea id ="trackInput" type="text" class="title" name="title[]" value=""></textarea>' +
+                            '</span>' +
+                            '<span class="loc-main">' +
+                            '<label for="matomoHeading"><f:translate key="heading.txt" extensionName="GdprExtensionsComMp" /><span>*</span></label>' +
+                            '<input id ="matomoHeading" type="text" class="matomoHeading" name="matomoHeading" value="">' +
+                            '</span>' +
+                            '<span class="loc-main">' +
+                            '<label for="matomoDesc"><f:translate key="desc.txt" extensionName="GdprExtensionsComMp" /><span>*</span></label>' +
+                            '<input id ="matomoDesc" type="text" class="matomoDesc" name="matomoDesc" value="">' +
+                            '</span>' +
+                            '</div>';
+                            container.appendChild(newFieldSet);
+                            document.getElementById('trackInput').value = matomoData;
+                            document.getElementById('matomoHeading').value = heading;
+                            document.getElementById('matomoDesc').value = desc;
+
+                    }else{
+                        newFieldSet.innerHTML =
+                            '<div id="addLocMain">' +
+                            '<span class="loc-main">' +
+                            '<label for="title"><f:translate key="title.txt.gtm" extensionName="GdprExtensionsComMp" /><span>*</span></label>' +
+                            '<input id ="trackInputGtm" type="text" class="title" name="title[]" value="' + title + '">' +
+                            '</span>' +
+                            '</div>';
+                            container.appendChild(newFieldSet);
+                    }
+
+                }
+
+                function removeLocationField(button) {
+                    // Remove the parent .location-fields div
+                    button.parentElement.remove();
+                }
+
+                function openPopup(rootPageId) {
+                    currentRootPageId = rootPageId;
+                    document.getElementById('rootPageId').value = rootPageId;
+                    document.getElementById('popupForm').style.display = 'block';
+                }
+
+
+                function closePopup() {
+                    document.getElementById('popupForm').style.display = 'none';
+                    document.getElementById('overlay').classList.add('d-none');
+                }
+
+                function editLocations(rootPageId, type, rootPageUrl) {
+                    currentRootPageId = rootPageId;
+                    document.getElementById('rootPageId').value = rootPageId;
+                    document.getElementById('trackingTypeId').value = type;
+                    document.getElementById('trackingRootPageUrl').value = rootPageUrl;
+
+                    // Clear existing fields
+                    var container = document.getElementById('locationFieldsContainer');
+                    container.innerHTML = '';
+
+                    // Fetch existing location data
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", saveLocationUrl + "&rootPageId=" + rootPageId + "&type=" + type + "&rootUrl=" + rootPageUrl, true);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            var response = JSON.parse(xhr.responseText);
+                            var tracks = response.track;
+                            // Populate the form with existing location data
+                            if(tracks == ''){
+                                addLocationFields('','','',type);
+                                if(type == 'gtm'){
+                                    function isValidMatomoCode(gtmCode) {
+                                        // A GTM code should start with 'GTM-', followed by 7 alphanumeric characters.
+                                        return gtmCode.substring(0, 4) === 'GTM-';
+                                    }
+                                    // Function to handle keystroke change and disable save button
+                                    // Get the GTM code input element
+                                    var gtmCodeInput = document.getElementById('trackInputGtm');
+                                    // Get the save button element
+                                    var saveButton = document.getElementById('trackSubmit');
+                                    // Add event listener for keystroke change
+                                    gtmCodeInput?.addEventListener('keyup', function() {
+                                        // Get the GTM code value
+                                        var gtmCode = gtmCodeInput.value;
+                                        // Validate the GTM code
+                                        var isValidGTMCode = isValidMatomoCode(gtmCode);
+
+                                        // Disable or enable the save button based on GTM code validation
+                                        if (isValidGTMCode) {
+                                            saveButton.removeAttribute('disabled',false);
+                                        } else {
+                                            saveButton.setAttribute('disabled', true);
+
+                                        }
+                                    });
+                                }
+
+                            }else{
+                                tracks.forEach(function(track) {
+                                    type === 'matomo' ? addLocationFields(track.matomo,track.heading,track.desc,type): addLocationFields(track.gtm,type);
+
+                                });
+                            }
+                            // Show the popup form
+
+                            document.getElementById('trackTitle').innerText = 'Add '+type.charAt(0).toUpperCase()+type.slice(1)+" Code";
+                            // document.getElementById('trackInput').setAttribute('type','textarea');
+                            document.getElementById('popupForm').style.display = 'block';
+                            document.getElementById('overlay').classList.remove('d-none');
+                        }
+                    };
+                    xhr.send();
+                }
+
+
+                function submitForm() {
+                    var rootPageId = document.getElementById('rootPageId').value;
+                    var type = document.getElementById('trackingTypeId').value;
+                    var titles = document.querySelectorAll('.title');
+                    var rootPageUrl = document.getElementById('trackingRootPageUrl').value;
+                    var matomoHeading = document.getElementById('matomoHeading').value;
+                    var matomoDesc = document.getElementById('matomoDesc').value;
+                    // var apiKeys = document.querySelectorAll('.apiKey');
+                    var data = {
+                        actionType: 'trackingAdd', // Add the actionType parameter
+                        locations: [] // Create a nested array for locations
+                    };
+
+                    if(titles.length == 0){
+                        data.locations.push({
+                            rootPageId: rootPageId,
+                            title: titles.value,
+                            type: type,
+                            baseUrl: rootPageUrl,
+                            heading: matomoHeading,
+                            desc: matomoDesc,
+                        });
+                    }else{
+                        for (var i = 0; i < titles.length; i++) {
+                            data.locations.push({
+                                rootPageId: rootPageId,
+                                title: titles[i].value,
+                                type: type,
+                                baseUrl: rootPageUrl,
+                                heading: matomoHeading,
+                                desc: matomoDesc,
+                            });
+                        }
+                    }
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", saveLocationUrl, true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            closePopup();
+                        }
+                    };
+                    xhr.send(JSON.stringify(data));
+                }
+            </script>
+        </f:if>
+
+    </div>
+</div>
+
+
+<script>
+    const backgroudImage = document.getElementById("backgroundImage");
+
+    const uploadImageUrl =
+        document.getElementById("uploadImageUrl").innerText;
+
+    document
+        .getElementById("file-input")
+        ?.addEventListener("change", handleFileSelect);
+
+    function handleFileSelect(event) {
+        const fileInput = event.target;
+        const selectedImageContainer = document.getElementById(
+            "selected-image-container"
+        );
+        const selectedImage = document.getElementById("selected-image");
+
+        const file = fileInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                selectedImage.src = e.target.result;
+                selectedImageContainer.style.display = "block";
+            };
+
+            reader.readAsDataURL(file);
+
+            const formData = new FormData();
+            formData.append("image", file);
+            formData.append("isAjax", 1);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", uploadImageUrl, true);
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    backgroudImage.value = response.url;
+                } else {
+                    console.log("Error");
+                }
+            };
+            xhr.send(formData);
+        } else {
+            selectedImageContainer.style.display = "none";
+        }
+    }
+
+    var checkbox = document.querySelector('.switch input[type="checkbox"]');
+
+    checkbox?.addEventListener('change', function() {
+        toggle(this);
+    });
+
+    var colorPickers = document.querySelectorAll('.color-field');
+
+    // Loop through each color picker
+    colorPickers.forEach(function(picker) {
+        picker.addEventListener('change', function(e) {
+            var color = e.target.parentElement.parentElement.querySelector('.colorField');
+            color.value = e.target.value
+        });
+    });
+
+    let enabledbackgroundImage = document.getElementById('enabledbackgroundImage');
+    let checkboxToggle = document.querySelector('.switch input');
+    let backgroundImageColor = document.querySelector('#backgroundImageColor');
+    let bgEmptyColor = document.querySelector('.bg-empty-color');
+    if(enabledbackgroundImage){
+        if(enabledbackgroundImage.value == 1) {
+            checkboxToggle.setAttribute('checked', true);
+            toggle('image')
+        } else if(enabledbackgroundImage.value == 0) {
+            toggle('bg-color')
+        }
+    }
+
+    function toggle(e) {
+        var uploadImageDiv = document.querySelector('.uploadImage');
+        var bgcolorDiv = document.querySelector('.bg-color-parent');
+        if (e.checked) {
+            uploadImageDiv.classList.remove('d-none');
+            uploadImageDiv.classList.add('d-flex');
+            bgcolorDiv.classList.remove('d-block');
+            bgcolorDiv.classList.add('d-none');
+            enabledbackgroundImage.value = 1
+            backgroundImageColor.value="";
+            bgEmptyColor.value='#000';
+        } else if(e.checked == false) {
+            uploadImageDiv.classList.remove('d-flex');
+            uploadImageDiv.classList.add('d-none');
+            bgcolorDiv.classList.add('d-block');
+            bgcolorDiv.classList.remove('d-none');
+            enabledbackgroundImage.value = 0
+        }
+
+        if(e == 'image') {
+            uploadImageDiv.classList.remove('d-none');
+            uploadImageDiv.classList.add('d-flex');
+            bgcolorDiv.classList.remove('d-block');
+            bgcolorDiv.classList.add('d-none');
+            backgroundImageColor.value="";
+            bgEmptyColor.value='#000';
+        }
+
+        if(e == 'bg-color') {
+            uploadImageDiv.classList.remove('d-flex');
+            uploadImageDiv.classList.add('d-none');
+            bgcolorDiv.classList.add('d-block');
+            bgcolorDiv.classList.remove('d-none');
+        }
+    }
+
+
+
+
+</script>
+</html>

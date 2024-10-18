@@ -1,0 +1,46 @@
+{
+  "name": "gdpr-extensions-com/gdpr-extensions-com-mp",
+  "type": "typo3-cms-extension",
+  "description": "Track your website viewers behavior and get your user analytics but only if they consent to! Stay GDPR compliant when your website is scanned by any Cookie or GDPR Scanner, when using Meta Pixel Analytics.",
+  "version": "1.0.1",
+  "authors": [],
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "typo3/cms-core": "^11.5 || ^12.4"
+  },
+  "require-dev": {
+    "typo3/testing-framework": "^6.9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "GdprExtensionsCom\\GdprExtensionsComMp\\": "Classes"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GdprExtensionsCom\\GdprExtensionsComMp\\Tests\\": "Tests"
+    }
+  },
+  "replace": {
+    "typo3-ter/gdpr-extensions-com-mp": "self.version"
+  },
+  "config": {
+    "vendor-dir": ".Build/vendor",
+    "bin-dir": ".Build/bin",
+    "allow-plugins": {
+      "typo3/class-alias-loader": true,
+      "typo3/cms-composer-installers": true
+    }
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
+    ]
+  },
+  "extra": {
+    "typo3/cms": {
+      "web-dir": ".Build/Web",
+      "extension-key": "gdpr_extensions_com_mp"
+    }
+  }
+}

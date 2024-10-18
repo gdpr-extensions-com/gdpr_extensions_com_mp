@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:gdpr_extensions_com_mp/Resources/Private/Language/locallang_db.xlf" date="2023-12-15T08:19:36Z" product-name="gdpr_extensions_com_mp">
+		<header/>
+		<body>
+			<trans-unit id="tx_GdprTwoXMatomo_domain_model_gdprgoogle_reviewlist" resname="tx_GdprTwoXMatomo_domain_model_gdprgoogle_reviewlist">
+				<source>Gdpr GoogleReviewlist</source>
+			</trans-unit>
+			<trans-unit id="tx_GdprTwoXMatomo_domain_model_gdprgoogle_reviewlist.description" resname="tx_GdprTwoXMatomo_domain_model_gdprgoogle_reviewlist.description">
+				<source>Gdpr GoogleReviewlist</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager">
+				<source>Gdpr Manager</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.description">
+				<source>Gdpr Manager</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading">
+				<source>Heading</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.heading.description">
+				<source>Heading</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.content" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.content">
+				<source>Content</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.content.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.content.description">
+				<source>Content</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text">
+				<source>Button Text</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_text.description">
+				<source>Button Text</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.enable_background_image" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.enable_background_image">
+				<source>Enable Background Image</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.enable_background_image.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.enable_background_image.description">
+				<source>Enable Background Image</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image">
+				<source>Background Image</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_image" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_image">
+				<source>Cookie Widget Image</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image.description">
+				<source>Background Image</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_image.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_image.description">
+				<source>Cookie Widget Image</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color">
+				<source>Background Color</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.background_image_color.description">
+				<source>Background Color</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color">
+				<source>Button Color</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_color.description">
+				<source>Button Color</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.text_color" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.text_color">
+				<source>Text Color</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.text_color.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.text_color.description">
+				<source>Text Color</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_shape" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_shape">
+				<source>Button Shape</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_shape.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.button_shape.description">
+				<source>Button Shape</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_position" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_position">
+				<source>Cookie Widget Position</source>
+			</trans-unit>
+			<trans-unit id="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_position.description" resname="tx_gdprextensionscomyoutube_domain_model_gdprmanager.cookie_widget_position.description">
+				<source>Cookie Widget Position</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.name" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.name">
+				<source>GDPR-Extensions.com - GoogleReviewlist</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.name.tab" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.name.tab">
+				<source>GDPR-Extensions-Com</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.description" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.description">
+				<source></source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist">
+				<source>GDPR GoogleReviewlist</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_url" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_url">
+				<source>Video Url</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.map_marker_image" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.map_marker_image">
+				<source>Marker Image</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_url.description" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_url.description">
+				<source>Video Url</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_review_image" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_review_image">
+				<source>Video Review Image</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_review_image.description" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_review_image.description">
+				<source>Video Review Image</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_options" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_options">
+				<source>Video Options</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_options.description" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_options.description">
+				<source>Video Options</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_start_time" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_start_time">
+				<source>Video Start Time</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_start_time.description" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_start_time.description">
+				<source>Video Start Time</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_end_time" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_end_time">
+				<source>Video End Time</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_end_time.description" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_vid_end_time.description">
+				<source>Video End Time</source>
+			</trans-unit>
+
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_yts_autoplay" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_yts_autoplay">
+				<source>Video Autoplay</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_yts_show_captions" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_yts_show_captions">
+				<source>Video Show Captions</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_yts_disable_annotations" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_yts_disable_annotations">
+				<source>Video Disable Annotations</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_yts_disable_keyboard" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_yts_disable_keyboard">
+				<source>Video Disable Keyboard</source>
+			</trans-unit>
+			<trans-unit id="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_yts_display_fs" resname="tx_gdpr_two_x_meta_gdprgoogle_reviewlist.gdpr_yts_display_fs">
+				<source>Video Display Fullscreen</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

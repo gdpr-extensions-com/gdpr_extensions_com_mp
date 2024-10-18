@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:gdpr_extensions_com_mp/Resources/Private/Language/locallang_csh_tx_GdprTwoXMatomo_domain_model_gdprmanager.xlf" date="2023-12-15T08:19:36Z" product-name="gdpr_extensions_com_mp">
+		<header/>
+		<body>
+			<trans-unit id="heading.description" resname="heading.description">
+				<source>heading</source>
+			</trans-unit>
+			<trans-unit id="content.description" resname="content.description">
+				<source>content</source>
+			</trans-unit>
+			<trans-unit id="button_text.description" resname="button_text.description">
+				<source>buttonText</source>
+			</trans-unit>
+			<trans-unit id="enable_background_image.description" resname="enable_background_image.description">
+				<source>enableBackgroundImage</source>
+			</trans-unit>
+			<trans-unit id="background_image.description" resname="background_image.description">
+				<source>backgroundImage</source>
+			</trans-unit>
+			<trans-unit id="background_image_color.description" resname="background_image_color.description">
+				<source>backgroundImageColor</source>
+			</trans-unit>
+			<trans-unit id="button_color.description" resname="button_color.description">
+				<source>buttonColor</source>
+			</trans-unit>
+			<trans-unit id="text_color.description" resname="text_color.description">
+				<source>textColor</source>
+			</trans-unit>
+			<trans-unit id="button_shape.description" resname="button_shape.description">
+				<source>buttonShape</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

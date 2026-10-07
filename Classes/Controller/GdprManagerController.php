@@ -187,11 +187,12 @@ class GdprManagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * action create
      *
      * @param \GdprExtensionsCom\GdprExtensionsComMp\Domain\Model\GdprManager $newGdprManager
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    public function createAction(\GdprExtensionsCom\GdprExtensionsComMp\Domain\Model\GdprManager $newGdprManager)
+    public function createAction(\GdprExtensionsCom\GdprExtensionsComMp\Domain\Model\GdprManager $newGdprManager): \Psr\Http\Message\ResponseInterface
     {
         $this->gdprManagerRepository->add($newGdprManager);
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
      /**
@@ -415,11 +416,12 @@ class GdprManagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * action delete
      *
      * @param \GdprExtensionsCom\GdprExtensionsComMp\Domain\Model\GdprManager $gdprManager
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    public function deleteAction(\GdprExtensionsCom\GdprExtensionsComMp\Domain\Model\GdprManager $gdprManager)
+    public function deleteAction(\GdprExtensionsCom\GdprExtensionsComMp\Domain\Model\GdprManager $gdprManager): \Psr\Http\Message\ResponseInterface
     {
         $this->gdprManagerRepository->remove($gdprManager);
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
